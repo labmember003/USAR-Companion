@@ -43,5 +43,11 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
-    <string name="about">About</string>
+    <string name="About">USAR Companion is a one stop shop for all your college problems.
+        Whatever your requirements, be it books, notes or previous year papers to practice, Societies and much more :). We have what you need to ace those exams the university throws at you.
+        The user friendly interface ensures you find what you </string>
+    <string name="about">About App</string>
+    <string name="resources">Resources</string>
+    <string name="get_directions">Get Directions</string>
+    <string name="societies">Societies</string>
 </resources>

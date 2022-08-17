@@ -1,5 +1,7 @@
 package com.falcon.usarcompanion
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -33,7 +35,9 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            findNavController().navigate(R.id.action_FirstFragment_to_campusMap)
+            //findNavController().navigate(R.id.action_FirstFragment_to_aboutFragment)
         }
     }
 
@@ -42,3 +46,11 @@ class FirstFragment : Fragment() {
         _binding = null
     }
 }
+/*
+// CODE TO LAUNCH USAR IN GOOGLE MAPS
+val intent = Intent(
+    Intent.ACTION_VIEW,
+    Uri.parse("http://maps.google.com/maps?34.34&daddr=28.66488568388205, 77.30043327394083")
+)
+startActivity(intent)
+ */
