@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="300dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    android:orientation="vertical"
+    tools:context=".Resources">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ImageView
+        android:id="@+id/year1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|left"
+        tools:src="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/year2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right"
+        tools:src="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/year3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        tools:src="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/year4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        tools:src="@tools:sample/avatars" />
+
+
+</FrameLayout>
