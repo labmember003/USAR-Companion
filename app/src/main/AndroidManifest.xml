@@ -13,7 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.USARCompanion"
         tools:targetApi="31">
-
+        <activity
+            android:name=".YearTabbedActivity"
+            android:exported="false"
+            android:label="@string/title_activity_year_tabbed"
+            android:theme="@style/Theme.USARCompanion.NoActionBar" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -27,7 +31,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyADKEQlFz40YsQxpnwTfgZmFcJ2cjdXG-k"/>
+            android:value="AIzaSyADKEQlFz40YsQxpnwTfgZmFcJ2cjdXG-k" />
 
         <activity
             android:name=".MainActivity"
