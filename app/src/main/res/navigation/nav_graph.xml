@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_yearTabbedActivity"
             app:destination="@id/yearTabbedActivity" />
+        <action
+            android:id="@+id/action_FirstFragment_to_overviewFragment"
+            app:destination="@id/overviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -49,4 +52,8 @@
         android:name="com.falcon.usarcompanion.YearTabbedActivity"
         android:label="activity_year_tabbed"
         tools:layout="@layout/activity_year_tabbed" />
+    <fragment
+        android:id="@+id/overviewFragment"
+        android:name="com.falcon.usarcompanion.overview.OverviewFragment"
+        android:label="OverviewFragment" />
 </navigation>
