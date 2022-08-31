@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation1"
+        android:icon="@android:drawable/btn_star"
+        android:title="Notes n Files" />
+
+    <item
+        android:id="@+id/navigation2"
+        android:icon="@android:drawable/alert_light_frame"
+        android:title="Papers" />
+
+    <item
+        android:id="@+id/navigation3"
+        android:icon="@android:drawable/arrow_down_float"
+        android:title="Books" />
+
+
+
+</menu>

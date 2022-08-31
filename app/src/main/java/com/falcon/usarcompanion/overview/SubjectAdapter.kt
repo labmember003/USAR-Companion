@@ -17,17 +17,21 @@ class HeadlineItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     var tvTitle = itemView.findViewById<TextView>(R.id.tvTitle)
 }
 
+
 class SubjectItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var subjectIcon = itemView.findViewById<ImageView>(R.id.subjectIcon)
     var subjectName = itemView.findViewById<TextView>(R.id.subjectName)
 }
 
+
+
 class SubjectAdapter(
     val context: Context,
     private val oddSemesterSubjects: List<Subject>,
-    private val evenSemesterSubjects: List<Subject>
+    private val evenSemesterSubjects: List<Subject>,
+    private val onSubjectClick: (Subject) -> Unit
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+    //val m: sabKiMausi
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             TYPE_HEADLINE -> HeadlineItemViewHolder(LayoutInflater.from(context).inflate(R.layout.recyclerview_headline_item_layout, null))
@@ -45,9 +49,17 @@ class SubjectAdapter(
         }
     }
 
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.setOnClickListener{
-
+            /*
+            NAVIGATION KA CODE (OBVIOUSLY WITHOUT ARGUEMENTS)
+            val navController = Navigation.findNavController(it)
+            navController.navigate(R.id.FirstFragment)
+             */
+            if (getItemViewType(position) == TYPE_SUBJECT) {
+                onSubjectClick(getSubject(position))
+            }
         }
         when(holder) {
             is HeadlineItemViewHolder -> {
@@ -65,6 +77,14 @@ class SubjectAdapter(
         }
     }
 
+    private fun getSubject(position: Int) : Subject {
+        if (isOddSemester(position)) {
+            return oddSemesterSubjects[position - 1]
+        } else {
+            return evenSemesterSubjects[position - 2]
+        }
+    }
+
     private fun isOddSemester(position: Int): Boolean {
         return (position - 1) < oddSemesterSubjects.size
     }
@@ -72,5 +92,16 @@ class SubjectAdapter(
     override fun getItemCount(): Int {
         return oddSemesterSubjects.size + evenSemesterSubjects.size + 2
     }
+    /*
+    interface sabKiMausi{
+        fun mausiReMausi(mau: Int): Void
+    }
+     */
 }
-
+/*
+implements sabKiMausi {
+    fun mausiReMausi(mau: Int): Int{
+        return mau+1
+    }
+}
+ */

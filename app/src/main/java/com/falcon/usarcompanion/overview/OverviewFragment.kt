@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.falcon.usarcompanion.R
 import com.falcon.usarcompanion.databinding.FragmentOverviewBinding
 import com.falcon.usarcompanion.network.Subject
 
-class OverviewFragment : Fragment() {
+class OverviewFragment : Fragment()  {
 
     private val viewModel: OverviewViewModel by lazy {
         ViewModelProvider(this).get(OverviewViewModel::class.java)
@@ -44,7 +46,7 @@ class OverviewFragment : Fragment() {
                     evenSemesterSubjects.add(subject)
                 }
             }
-            val adapter = SubjectAdapter(requireContext(), oddSemesterSubjects, evenSemesterSubjects)
+            val adapter = SubjectAdapter(requireContext(), oddSemesterSubjects, evenSemesterSubjects, ::onSubjectClick)
             //val map = subjects.groupBy { if (it.semester == "odd") "o" else "e" }
             //val adapter = SubjectAdapter(requireContext(), map["o"] ?: listOf(), map["e"] ?: listOf())
             binding.rvSubjects.adapter = adapter
@@ -60,4 +62,14 @@ class OverviewFragment : Fragment() {
 
         return binding.root
     }
+
+    fun onSubjectClick(currentSubject: Subject) : Unit {
+        val bundle = Bundle()
+        bundle.putSerializable("CurrentSubject", currentSubject)
+        findNavController().navigate(R.id.action_overviewFragment_to_mainActivity3, bundle)
+    }
+
+
 }
+
+

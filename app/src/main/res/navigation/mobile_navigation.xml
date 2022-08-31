@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation1">
+
+    <fragment
+        android:id="@+id/navigation1"
+        android:name="com.falcon.usarcompanion.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+        <argument android:name="Notes"
+            app:argType="com.falcon.usarcompanion.network.Section" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation2"
+        android:name="com.falcon.usarcompanion.ui.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_second_in_bnv" >
+        <argument android:name="papers"
+            app:argType="com.falcon.usarcompanion.network.Section" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation3"
+        android:name="com.falcon.usarcompanion.ui.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" >
+        <argument android:name="books"
+            app:argType="com.falcon.usarcompanion.network.Section" />
+    </fragment>
+</navigation>

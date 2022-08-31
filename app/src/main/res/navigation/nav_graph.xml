@@ -55,5 +55,13 @@
     <fragment
         android:id="@+id/overviewFragment"
         android:name="com.falcon.usarcompanion.overview.OverviewFragment"
-        android:label="OverviewFragment" />
+        android:label="OverviewFragment" >
+        <action
+            android:id="@+id/action_overviewFragment_to_mainActivity3"
+            app:destination="@id/mainActivity3" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity3"
+        android:name="com.falcon.usarcompanion.MainActivity3"
+        android:label="MainActivity3" />
 </navigation>

@@ -20,6 +20,10 @@
             android:exported="false"
             android:label="@string/title_activity_year_tabbed"
             android:theme="@style/Theme.USARCompanion.NoActionBar" />
+        <activity
+            android:name=".MainActivity3"
+            android:exported="false"
+            android:label="@string/title_activity_main3" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
