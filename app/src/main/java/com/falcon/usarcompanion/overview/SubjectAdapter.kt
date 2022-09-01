@@ -81,7 +81,7 @@ class SubjectAdapter(
         if (isOddSemester(position)) {
             return oddSemesterSubjects[position - 1]
         } else {
-            return evenSemesterSubjects[position - 2]
+            return evenSemesterSubjects[(position - oddSemesterSubjects.size) - 2]
         }
     }
 
