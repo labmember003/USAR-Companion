@@ -58,7 +58,7 @@
     <string name="tab_text_3">IIOT</string>
     <string name="tab_text_4">AR</string>
     <string name="title_activity_main3">MainActivity3</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">Notes n Files</string>
+    <string name="title_dashboard">Papers</string>
+    <string name="title_notifications">Books</string>
 </resources>

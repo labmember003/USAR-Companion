@@ -1,12 +1,15 @@
 package com.falcon.usarcompanion
 
+import android.os.BaseBundle
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.falcon.usarcompanion.databinding.ActivityMain3Binding
+import com.falcon.usarcompanion.network.Section
 import com.falcon.usarcompanion.network.Subject
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -27,12 +30,19 @@ private lateinit var binding: ActivityMain3Binding
 
         val bundleNotes = Bundle(); val bundlePaper = Bundle(); val bundleBooks = Bundle()
         //bundleNotes.putSerializable("Notes", result.sections[0]) // 0 for notes and files 1 for papers and 2 for books
-        //
         val bundleKeyList = listOf<String>("Notes", "papers", "books")
         val bundleList = listOf<Bundle>(bundleNotes, bundlePaper, bundleBooks)
         for (i in 0..2) {
             bundleList[i].putSerializable(bundleKeyList[i], result.sections[i])
+            // if array pass krni ho tho :-
+            //bundleList[i].putSerializable(bundleKeyList[i],ArrayList(result.sections))
+            //bundleList[i].putSerializable(bundleKeyList[i],result.sections.toTypedArray())
+            // this works because ArrayList aur TypedArray internally implements serializable
         }
+        //val b = Bundle()
+        //b.putSerializable("ma", result.sections[0].contents[0])
+        //b.putParcelableArrayList("Product", result.sections[0])
+
         //
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main3).also {
@@ -72,5 +82,7 @@ private lateinit var binding: ActivityMain3Binding
     }
 
 }
+
+
 
 

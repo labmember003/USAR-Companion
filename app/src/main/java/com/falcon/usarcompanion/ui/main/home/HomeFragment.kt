@@ -5,11 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.falcon.usarcompanion.databinding.FragmentHomeBinding
 import com.falcon.usarcompanion.network.Section
+import com.falcon.usarcompanion.ui.main.RcvContentAdapter
 
 class HomeFragment : Fragment() {
 
@@ -29,21 +30,30 @@ private var _binding: FragmentHomeBinding? = null
     _binding = FragmentHomeBinding.inflate(inflater, container, false)
     val root: View = binding.root
 
+      /*
     val textView: TextView = binding.textHome
     homeViewModel.text.observe(viewLifecycleOwner) {
       textView.text = it
     }
+       */
     return root
   }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val notes : Section?
+        var notes : Section? = null
         if (arguments != null) {
             notes = arguments?.getSerializable("Notes") as Section?
             Log.i("billinotes", notes?.title.toString())
         }
         Log.i("billi","data reached in frag")
+        //
+        //TODO("HANDLE NULL")
+        if (notes?.contents != null) {}
 
+        val adapter = RcvContentAdapter(requireContext(), notes?.contents!!, notes.title)
+        binding.rvContents.adapter = adapter
+        binding.rvContents.layoutManager = LinearLayoutManager(requireContext())
+        //
 
     }
     override fun onDestroyView() {
