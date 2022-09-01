@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.falcon.usarcompanion.databinding.FragmentNotificationsBinding
 import com.falcon.usarcompanion.network.Section
+import com.falcon.usarcompanion.ui.main.RcvContentAdapter
 
 class NotificationsFragment : Fragment() {
 
@@ -28,13 +30,15 @@ private var _binding: FragmentNotificationsBinding? = null
 
     _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
     val root: View = binding.root
-
+/*
     val textView: TextView = binding.textNotifications
     notificationsViewModel.text.observe(viewLifecycleOwner) {
       textView.text = it
     }
+ */
     return root
   }
+    /*
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val books : Section?
@@ -43,6 +47,25 @@ private var _binding: FragmentNotificationsBinding? = null
             Log.i("billibooks", books?.title.toString())
         }
         Log.i("billi","data reached in frag")
+    }
+     */
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        var books : Section? = null
+        if (arguments != null) {
+            books = arguments?.getSerializable("books") as Section?
+            Log.i("billibooks", books?.title.toString())
+        }
+        Log.i("billi","data reached in frag")
+        //
+        //TODO("HANDLE NULL")
+        if (books?.contents != null) {}
+
+        val adapter = RcvContentAdapter(requireContext(), books?.contents!!, books.title)
+        binding.rvContentsBooks.adapter = adapter
+        binding.rvContentsBooks.layoutManager = LinearLayoutManager(requireContext())
+        //
+
     }
     override fun onDestroyView() {
         super.onDestroyView()
