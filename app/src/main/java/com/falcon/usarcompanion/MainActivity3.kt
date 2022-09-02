@@ -1,11 +1,15 @@
 package com.falcon.usarcompanion
 
+import android.app.Activity
 import android.os.BaseBundle
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavDeepLinkBuilder
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.falcon.usarcompanion.databinding.ActivityMain3Binding
@@ -82,7 +86,7 @@ private lateinit var binding: ActivityMain3Binding
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        finish()
     }
 
 }
