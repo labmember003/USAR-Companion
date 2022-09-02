@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.falcon.usarcompanion.R
+import com.falcon.usarcompanion.databinding.RecyclerviewSubjectsItemLayoutBinding
 import com.falcon.usarcompanion.network.Subject
 
 private const val TYPE_HEADLINE = 0
@@ -31,11 +34,11 @@ class SubjectAdapter(
     private val evenSemesterSubjects: List<Subject>,
     private val onSubjectClick: (Subject) -> Unit
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    //val m: sabKiMausi
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            TYPE_HEADLINE -> HeadlineItemViewHolder(LayoutInflater.from(context).inflate(R.layout.recyclerview_headline_item_layout, null))
-            TYPE_SUBJECT -> SubjectItemViewHolder(LayoutInflater.from(context).inflate(R.layout.recyclerview_subjects_item_layout, null))
+            TYPE_HEADLINE -> HeadlineItemViewHolder(LayoutInflater.from(context).inflate(R.layout.recyclerview_headline_item_layout, parent, false))
+            TYPE_SUBJECT -> SubjectItemViewHolder(LayoutInflater.from(context).inflate(R.layout.recyclerview_subjects_item_layout, parent, false))
             else -> throw IllegalStateException("Unknown viewType: $viewType")
         }
     }
@@ -51,7 +54,7 @@ class SubjectAdapter(
 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.setOnClickListener{
+        holder.itemView.rootView.setOnClickListener{
             /*
             NAVIGATION KA CODE (OBVIOUSLY WITHOUT ARGUEMENTS)
             val navController = Navigation.findNavController(it)
@@ -71,7 +74,13 @@ class SubjectAdapter(
                 } else {
                     evenSemesterSubjects[position - (oddSemesterSubjects.size + 2)]
                 }
+
                 holder.subjectName.text = subject.subjectName
+
+                val imgUri = subject.iconUrl.toUri().buildUpon().scheme("https").build()
+                Glide.with(context)
+                    .load(imgUri)
+                    .into(holder.subjectIcon)
             }
             else -> throw IllegalStateException("Unknown holder: $holder")
         }

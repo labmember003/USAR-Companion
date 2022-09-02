@@ -64,4 +64,12 @@
         android:id="@+id/mainActivity3"
         android:name="com.falcon.usarcompanion.MainActivity3"
         android:label="MainActivity3" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.falcon.usarcompanion.ui.home.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_mainActivity3"
+            app:destination="@id/mainActivity3" />
+    </fragment>
 </navigation>

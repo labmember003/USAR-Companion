@@ -67,7 +67,6 @@ private lateinit var binding: ActivityMain3Binding
         }
          */
 
-
         navView.setOnItemSelectedListener { item ->
             //when (item.itemId) { }
             if (item.itemId == R.id.navigation1) {
@@ -79,6 +78,11 @@ private lateinit var binding: ActivityMain3Binding
             }
             true
         }
+
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 
 }
