@@ -60,7 +60,11 @@ private var _binding: FragmentSecondInBnvBinding? = null
         Log.i("billi","data reached in frag")
         //
         //TODO("HANDLE NULL")
-        if (papers?.contents != null) {}
+        if (papers?.contents?.isEmpty() == true) {
+            Log.i("emptyContent", "${papers.title} is empty")
+            //binding.tvErrorMessageContents.
+            binding.sale = true
+        }
 
         val adapter = RcvContentAdapter(requireContext(), papers?.contents!!, papers.title, ::onContentClick)
         binding.rvContentsPapers.adapter = adapter

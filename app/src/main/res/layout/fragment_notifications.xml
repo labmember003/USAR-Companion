@@ -30,6 +30,10 @@ xmlns:tools="http://schemas.android.com/tools">
     <variable
         name="viewModel"
         type="com.falcon.usarcompanion.ui.notifications.NotificationsViewModel"/>
+    <import type="android.view.View"/>
+    <variable
+        name="sale"
+        type="java.lang.Boolean"/>
 </data>
 <FrameLayout
     android:layout_width="match_parent"
@@ -43,8 +47,8 @@ xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
         android:id="@+id/tvErrorMessagePapers"
-        android:visibility="gone"
-        android:text="Failed to load. Please retry"
+        android:visibility="@{sale ? View.VISIBLE : View.GONE}"
+        android:text="Coming Soon :)"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

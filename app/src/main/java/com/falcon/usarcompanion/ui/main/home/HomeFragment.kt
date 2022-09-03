@@ -57,7 +57,11 @@ private var _binding: FragmentHomeBinding? = null
         Log.i("billi","data reached in frag")
         //
         //TODO("HANDLE NULL")
-        if (notes?.contents != null) {}
+        if (notes?.contents?.isEmpty() == true) {
+            Log.i("emptyContent", "${notes.title} is empty")
+            //binding.tvErrorMessageContents.
+            binding.sale = true
+        }
 
         val adapter = RcvContentAdapter(requireContext(), notes?.contents!!, notes.title, ::onContentClick)
         binding.rvContents.adapter = adapter
