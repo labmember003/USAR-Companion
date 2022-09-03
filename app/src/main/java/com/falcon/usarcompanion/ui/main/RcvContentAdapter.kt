@@ -21,7 +21,7 @@ import com.google.android.material.imageview.ShapeableImageView
 
 class RcvContentAdapter(val context: Context, private val contents: List<Content>,
     val sectionType : String
-    //, private val onContentClick : (String, String) -> Unit
+    , private val onContentClick : (String, String) -> Unit
     ): RecyclerView.Adapter<RcvContentAdapter.RcvContentViewHolder>(){
     lateinit var iconURL: String
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RcvContentViewHolder {
@@ -34,7 +34,7 @@ class RcvContentAdapter(val context: Context, private val contents: List<Content
         holder.itemView.setOnClickListener {
             val fileURL: String = contents[position].sourceUrl
             val titleAndFileName: String = extractProperName(contents[position].sourceUrl)
-            //onContentClick(fileURL, titleAndFileName)
+            onContentClick(fileURL, titleAndFileName)
             // TODO Name mei spaces bhi honge ager dikkat aayi tho change krna pdega
         }
         holder.contentName.text = contents[position].name

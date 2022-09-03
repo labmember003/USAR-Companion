@@ -59,7 +59,7 @@ private var _binding: FragmentHomeBinding? = null
         //TODO("HANDLE NULL")
         if (notes?.contents != null) {}
 
-        val adapter = RcvContentAdapter(requireContext(), notes?.contents!!, notes.title)
+        val adapter = RcvContentAdapter(requireContext(), notes?.contents!!, notes.title, ::onContentClick)
         binding.rvContents.adapter = adapter
         binding.rvContents.layoutManager = LinearLayoutManager(requireContext())
         //

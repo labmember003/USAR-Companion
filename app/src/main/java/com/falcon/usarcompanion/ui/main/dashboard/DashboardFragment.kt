@@ -62,7 +62,7 @@ private var _binding: FragmentSecondInBnvBinding? = null
         //TODO("HANDLE NULL")
         if (papers?.contents != null) {}
 
-        val adapter = RcvContentAdapter(requireContext(), papers?.contents!!, papers.title)
+        val adapter = RcvContentAdapter(requireContext(), papers?.contents!!, papers.title, ::onContentClick)
         binding.rvContentsPapers.adapter = adapter
         binding.rvContentsPapers.layoutManager = LinearLayoutManager(requireContext())
 

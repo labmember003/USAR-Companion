@@ -62,7 +62,7 @@ private var _binding: FragmentNotificationsBinding? = null
         //TODO("HANDLE NULL")
         if (books?.contents != null) {}
 
-        val adapter = RcvContentAdapter(requireContext(), books?.contents!!, books.title)
+        val adapter = RcvContentAdapter(requireContext(), books?.contents!!, books.title, ::onContentClick)
         binding.rvContentsBooks.adapter = adapter
         binding.rvContentsBooks.layoutManager = LinearLayoutManager(requireContext())
         //
