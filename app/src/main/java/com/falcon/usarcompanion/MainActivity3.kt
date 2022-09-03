@@ -2,9 +2,13 @@ package com.falcon.usarcompanion
 
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.Activity
+import android.app.DownloadManager
+import android.content.Context
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.BaseBundle
 import android.os.Bundle
+import android.os.Environment
 import android.os.Parcelable
 import android.util.Log
 import android.widget.Toast
@@ -42,6 +46,7 @@ private lateinit var binding: ActivityMain3Binding
                 12);
         } else {
             Toast.makeText(this, "Permission mil gyi bisi", Toast.LENGTH_SHORT).show()
+            startDownloading()
         }
 
         // This function is called when the user accepts or decline the permission.
@@ -109,6 +114,20 @@ private lateinit var binding: ActivityMain3Binding
             true
         }
 
+    }
+
+    private fun startDownloading() {
+        val url : String = "https://github.com/labmember003/usar_data/raw/master/YEAR_1/Sem1/CommunicationSkills/Exam/MinorExam.pdf"
+        val request = DownloadManager.Request(Uri.parse(url))
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
+        request.setTitle("Download")
+        request.setDescription("File is donwloading")
+        request.allowScanningByMediaScanner()
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "mausi.pdf")
+
+        val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+        manager.enqueue(request)
     }
 
     override fun onBackPressed() {
