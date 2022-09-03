@@ -1,16 +1,19 @@
 package com.falcon.usarcompanion.ui.home
 
+import android.app.DownloadManager
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.falcon.usarcompanion.MainActivity3
 import com.falcon.usarcompanion.R
 import com.falcon.usarcompanion.databinding.FragmentHomeBinding
 import com.falcon.usarcompanion.network.Section
@@ -44,6 +47,8 @@ private var _binding: FragmentHomeBinding? = null
   }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // TODO mausi
+
         var notes : Section? = null
         if (arguments != null) {
             notes = arguments?.getSerializable("Notes") as Section?
@@ -69,10 +74,8 @@ private var _binding: FragmentHomeBinding? = null
         findNavController().navigate(R.id.action_homeFragment_to_mainActivity3)
     }
  */
-    val callback = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() {
-            findNavController().navigate(R.id.action_homeFragment_to_mainActivity3)
-        }
+    fun onContentClick(fileURL: String, titleAndFileName: String) {
+        (activity as MainActivity3?)!!.startDownloading(fileURL, titleAndFileName)
     }
     //requireActivity()
 

@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.falcon.usarcompanion.MainActivity3
 import com.falcon.usarcompanion.databinding.FragmentNotificationsBinding
 import com.falcon.usarcompanion.network.Section
 import com.falcon.usarcompanion.ui.main.RcvContentAdapter
@@ -70,5 +71,8 @@ private var _binding: FragmentNotificationsBinding? = null
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+    fun onContentClick(fileURL: String, titleAndFileName: String) {
+        (activity as MainActivity3?)!!.startDownloading(fileURL, titleAndFileName)
     }
 }

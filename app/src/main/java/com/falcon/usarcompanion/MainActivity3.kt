@@ -45,8 +45,8 @@ private lateinit var binding: ActivityMain3Binding
                 arrayOf(WRITE_EXTERNAL_STORAGE),
                 12);
         } else {
-            Toast.makeText(this, "Permission mil gyi bisi", Toast.LENGTH_SHORT).show()
-            startDownloading()
+            Toast.makeText(this, "Permission mil gyi ", Toast.LENGTH_SHORT).show()
+            //startDownloading()
         }
 
         // This function is called when the user accepts or decline the permission.
@@ -116,7 +116,22 @@ private lateinit var binding: ActivityMain3Binding
 
     }
 
-    private fun startDownloading() {
+    fun startDownloading(fileURL: String, titleAndFileName: String) {
+        val url : String = fileURL
+        val request = DownloadManager.Request(Uri.parse(url))
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
+        request.setTitle(titleAndFileName)
+        request.setDescription("File is donwloading")
+        request.allowScanningByMediaScanner()
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, titleAndFileName)
+
+        val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+        manager.enqueue(request)
+    }
+
+    /*
+    fun startDownloading(fileURL: String, titleAndFileName: String) {
         val url : String = "https://github.com/labmember003/usar_data/raw/master/YEAR_1/Sem1/CommunicationSkills/Exam/MinorExam.pdf"
         val request = DownloadManager.Request(Uri.parse(url))
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
@@ -129,6 +144,7 @@ private lateinit var binding: ActivityMain3Binding
         val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         manager.enqueue(request)
     }
+     */
 
     override fun onBackPressed() {
         finish()
