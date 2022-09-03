@@ -1,11 +1,16 @@
 package com.falcon.usarcompanion
 
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.Activity
+import android.content.pm.PackageManager
 import android.os.BaseBundle
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavDeepLinkBuilder
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
@@ -16,6 +21,7 @@ import com.falcon.usarcompanion.databinding.ActivityMain3Binding
 import com.falcon.usarcompanion.network.Section
 import com.falcon.usarcompanion.network.Subject
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.jar.Manifest
 
 
 class MainActivity3 : AppCompatActivity() {
@@ -24,7 +30,27 @@ private lateinit var binding: ActivityMain3Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //
+        //ActivityCompat.requestPermissions(this,,1)
+        // Function to check and request permission.
 
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED) {
+            //Toast.makeText(this, "bro Permission tho de", Toast.LENGTH_SHORT).show()
+            ActivityCompat.requestPermissions(this,
+                arrayOf(WRITE_EXTERNAL_STORAGE),
+                12);
+        } else {
+            Toast.makeText(this, "Permission mil gyi bisi", Toast.LENGTH_SHORT).show()
+        }
+
+        // This function is called when the user accepts or decline the permission.
+// Request Code is used to check which permission called this function.
+// This request code is provided when the user is prompt for permission.
+
+
+
+        //
         binding = ActivityMain3Binding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
@@ -88,6 +114,20 @@ private lateinit var binding: ActivityMain3Binding
     override fun onBackPressed() {
         finish()
     }
+
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>,
+                                            grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 12) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Storage Permission Granted", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "Storage Permission Denied", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
 
 }
 
