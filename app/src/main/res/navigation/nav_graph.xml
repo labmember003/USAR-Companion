@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_overviewFragment"
             app:destination="@id/overviewFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_blankFragment"
+            app:destination="@id/blankFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -72,6 +75,15 @@
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_mainActivity3"
+            app:destination="@id/mainActivity3" />
+    </fragment>
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.falcon.usarcompanion.BlankFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_blank" >
+        <action
+            android:id="@+id/action_blankFragment_to_mainActivity3"
             app:destination="@id/mainActivity3" />
     </fragment>
 </navigation>

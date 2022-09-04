@@ -19,6 +19,8 @@ class OverviewFragment : Fragment()  {
         ViewModelProvider(this).get(OverviewViewModel::class.java)
     }
 
+    private var onPerformNavigation: ((subject: Subject) -> Unit)? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,12 +66,12 @@ class OverviewFragment : Fragment()  {
     }
 
     fun onSubjectClick(currentSubject: Subject) : Unit {
-        val bundle = Bundle()
-        bundle.putSerializable("CurrentSubject", currentSubject)
-        findNavController().navigate(R.id.action_overviewFragment_to_mainActivity3, bundle)
+        onPerformNavigation?.invoke(currentSubject)
     }
 
-
+    fun setOnPerformNavigation(onPerformNavigation: (subject: Subject) -> Unit) {
+        this.onPerformNavigation = onPerformNavigation
+    }
 }
 
 

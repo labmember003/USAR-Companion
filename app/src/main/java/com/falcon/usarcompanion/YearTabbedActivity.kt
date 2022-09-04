@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.falcon.usarcompanion.ui.main.SectionsPagerAdapter
 import com.falcon.usarcompanion.databinding.ActivityYearTabbedBinding
+import com.falcon.usarcompanion.network.Subject
 
 class YearTabbedActivity : AppCompatActivity() {
 
@@ -20,8 +21,10 @@ class YearTabbedActivity : AppCompatActivity() {
 
         binding = ActivityYearTabbedBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        fun onSub (subject: Subject) {
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
+        }
+        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager, ::onSub)
         val viewPager: ViewPager = binding.viewPager
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = binding.tabs
