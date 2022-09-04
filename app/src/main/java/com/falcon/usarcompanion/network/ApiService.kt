@@ -26,15 +26,15 @@ interface YearDataApiService {
     /*
     @GET("YEAR_2")
     fun getSecondYearData():
-            Deferred<List<SecondYearApiResponse>>
+            Deferred<SecondYearApiResponse>
 
     @GET("YEAR_3")
     fun getThirdYearData():
-            Deferred<List<ThirdYearApiResponse>>
+            Deferred<ThirdYearApiResponse>
 
     @GET("YEAR_4")
     fun getFourthYearData():
-            Deferred<List<FourthYearApiResponse>>
+            Deferred<FourthYearApiResponse>
      */
 }
 

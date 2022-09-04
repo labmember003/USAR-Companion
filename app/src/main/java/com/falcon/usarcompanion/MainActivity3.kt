@@ -125,7 +125,7 @@ private lateinit var binding: ActivityMain3Binding
         request.allowScanningByMediaScanner()
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, titleAndFileName)
-
+        Toast.makeText(baseContext, "Download has begun, See Notifications", Toast.LENGTH_LONG).show()
         val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         manager.enqueue(request)
     }
