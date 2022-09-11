@@ -1,4 +1,4 @@
-package com.falcon.usarcompanion.overview
+package com.falcon.usarcompanion.subjects
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,7 +10,6 @@ import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.falcon.usarcompanion.R
-import com.falcon.usarcompanion.databinding.RecyclerviewSubjectsItemLayoutBinding
 import com.falcon.usarcompanion.network.Subject
 
 private const val TYPE_HEADLINE = 0

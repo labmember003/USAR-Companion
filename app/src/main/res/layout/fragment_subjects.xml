@@ -5,12 +5,12 @@
     <data>
         <variable
             name="viewModel"
-            type="com.falcon.usarcompanion.overview.OverviewViewModel"/>
+            type="com.falcon.usarcompanion.subjects.SubjectsViewModel"/>
     </data>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".overview.OverviewFragment">
+        tools:context=".subjects.SubjectsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSubjects"

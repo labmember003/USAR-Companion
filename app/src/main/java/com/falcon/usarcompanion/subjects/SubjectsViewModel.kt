@@ -1,4 +1,4 @@
-package com.falcon.usarcompanion.overview
+package com.falcon.usarcompanion.subjects
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class OverviewViewModel : ViewModel() {
+class SubjectsViewModel : ViewModel() {
     private val _isDataFetchSuccessful = MutableLiveData<Boolean>(true)
     val isDataFetchSuccessful: LiveData<Boolean>
         get() = _isDataFetchSuccessful
