@@ -21,9 +21,6 @@
             android:id="@+id/action_FirstFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
         <action
-            android:id="@+id/action_FirstFragment_to_yearTabbedActivity"
-            app:destination="@id/yearTabbedActivity" />
-        <action
             android:id="@+id/action_FirstFragment_to_overviewFragment"
             app:destination="@id/overviewFragment" />
         <action
@@ -48,13 +45,8 @@
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.falcon.usarcompanion.AboutFragment"
-        android:label="fragment_about"
-        tools:layout="@layout/fragment_about" />
-    <activity
-        android:id="@+id/yearTabbedActivity"
-        android:name="com.falcon.usarcompanion.YearTabbedActivity"
-        android:label="activity_year_tabbed"
-        tools:layout="@layout/activity_year_tabbed" />
+        android:label="fragment_about">
+    </fragment>
     <fragment
         android:id="@+id/overviewFragment"
         android:name="com.falcon.usarcompanion.overview.OverviewFragment"
@@ -79,7 +71,7 @@
     </fragment>
     <fragment
         android:id="@+id/blankFragment"
-        android:name="com.falcon.usarcompanion.BlankFragment"
+        android:name="com.falcon.usarcompanion.BranchesTabbedFragment"
         android:label="fragment_blank"
         tools:layout="@layout/fragment_blank" >
         <action

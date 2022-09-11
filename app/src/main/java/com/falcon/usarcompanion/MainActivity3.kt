@@ -122,12 +122,48 @@ private lateinit var binding: ActivityMain3Binding
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
         request.setTitle(titleAndFileName)
         request.setDescription("File is donwloading")
+        //request.setMimeType("application/pdf")
+        request.setMimeType(getMimeType(fileURL))
         request.allowScanningByMediaScanner()
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, titleAndFileName)
         Toast.makeText(baseContext, "Download has begun, See Notifications", Toast.LENGTH_LONG).show()
         val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         manager.enqueue(request)
+    }
+
+    private fun getMimeType(fileURL: String): String {
+        val type = getType(fileURL)
+        return when(type) {
+            "pdf" -> "application/pdf"
+            "doc" -> "application/msword"
+            "docx" -> "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            "ppt" -> "application/vnd.ms-powerpoint"
+            "pptx" -> "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+            "xlsx" -> "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            "xls" -> "application/vnd.ms-excel"
+            "jpeg" -> "image/jpeg"
+            "jpg" -> "image/jpeg"
+            "txt" -> "text/plain"
+            "htm" -> "text/html"
+            "html" -> "text/html"
+            "mp4" -> "video/mp4"
+            "mp3" -> "audio/mpeg"
+            "zip" -> "application/zip"
+            else -> {
+                Toast.makeText(baseContext, "UNKNOWN FILE TYPE, PLEASE CONTACT DEVELOPER", Toast.LENGTH_LONG).show()
+                ""
+            }
+        }
+    }
+
+    private fun getType(fileURL: String): String {
+        for (i in (fileURL.indices).reversed()) {
+            if (fileURL[i] == '.') {
+                return fileURL.subSequence(i + 1, (fileURL.length)).toString()
+            }
+        }
+        return ""
     }
 
     /*
