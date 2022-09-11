@@ -1,20 +1,14 @@
 package com.falcon.usarcompanion.ui.home
 
-import android.app.DownloadManager
-import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.falcon.usarcompanion.MainActivity3
-import com.falcon.usarcompanion.R
+import com.falcon.usarcompanion.ContentActivity
 import com.falcon.usarcompanion.databinding.FragmentHomeBinding
 import com.falcon.usarcompanion.network.Section
 import com.falcon.usarcompanion.ui.main.RcvContentAdapter
@@ -79,7 +73,7 @@ private var _binding: FragmentHomeBinding? = null
     }
  */
     fun onContentClick(fileURL: String, titleAndFileName: String) {
-        (activity as MainActivity3?)!!.startDownloading(fileURL, titleAndFileName)
+        (activity as ContentActivity?)!!.startDownloading(fileURL, titleAndFileName)
     }
     //requireActivity()
 

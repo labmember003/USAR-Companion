@@ -29,7 +29,7 @@ class BranchesTabbedFragment : Fragment() {
         val sectionsPagerAdapter = SectionsPagerAdapter(this) { subject ->
             val bundle = Bundle()
             bundle.putSerializable("CurrentSubject", subject)
-            findNavController().navigate(R.id.action_BranchesTabbedFragment_to_mainActivity3, bundle)
+            findNavController().navigate(R.id.action_BranchesTabbedFragment_to_contentActivity, bundle)
         }
         val viewPager = binding.viewPager
         viewPager.adapter = sectionsPagerAdapter

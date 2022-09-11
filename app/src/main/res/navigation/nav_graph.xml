@@ -52,13 +52,13 @@
         android:name="com.falcon.usarcompanion.overview.OverviewFragment"
         android:label="OverviewFragment" >
         <action
-            android:id="@+id/action_overviewFragment_to_mainActivity3"
-            app:destination="@id/mainActivity3" />
+            android:id="@+id/action_overviewFragment_to_contentActivity"
+            app:destination="@id/contentActivity" />
     </fragment>
     <activity
-        android:id="@+id/mainActivity3"
-        android:name="com.falcon.usarcompanion.MainActivity3"
-        android:label="MainActivity3" >
+        android:id="@+id/contentActivity"
+        android:name="com.falcon.usarcompanion.ContentActivity"
+        android:label="ContentActivity" >
 
         </activity>
     <fragment
@@ -66,8 +66,8 @@
         android:name="com.falcon.usarcompanion.ui.home.HomeFragment"
         android:label="HomeFragment" >
         <action
-            android:id="@+id/action_homeFragment_to_mainActivity3"
-            app:destination="@id/mainActivity3" />
+            android:id="@+id/action_homeFragment_to_contentActivity"
+            app:destination="@id/contentActivity" />
     </fragment>
     <fragment
         android:id="@+id/BranchesTabbedFragment"
@@ -75,7 +75,7 @@
         android:label="fragment_blank"
         tools:layout="@layout/fragment_blank" >
         <action
-            android:id="@+id/action_BranchesTabbedFragment_to_mainActivity3"
-            app:destination="@id/mainActivity3" />
+            android:id="@+id/action_BranchesTabbedFragment_to_contentActivity"
+            app:destination="@id/contentActivity" />
     </fragment>
 </navigation>

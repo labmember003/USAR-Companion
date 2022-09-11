@@ -21,16 +21,16 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.falcon.usarcompanion.databinding.ActivityMain3Binding
+import com.falcon.usarcompanion.databinding.ActivityContentBinding
 import com.falcon.usarcompanion.network.Section
 import com.falcon.usarcompanion.network.Subject
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.jar.Manifest
 
 
-class MainActivity3 : AppCompatActivity() {
+class ContentActivity : AppCompatActivity() {
 
-private lateinit var binding: ActivityMain3Binding
+private lateinit var binding: ActivityContentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +56,7 @@ private lateinit var binding: ActivityMain3Binding
 
 
         //
-        binding = ActivityMain3Binding.inflate(layoutInflater)
+        binding = ActivityContentBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         val navView: BottomNavigationView = binding.navView
@@ -80,7 +80,7 @@ private lateinit var binding: ActivityMain3Binding
 
         //
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main3).also {
+        val navController = findNavController(R.id.nav_host_fragment_contentActivity).also {
             it.setGraph(R.navigation.mobile_navigation, bundleNotes)
         }
         // Passing each menu ID as a set of Ids because each

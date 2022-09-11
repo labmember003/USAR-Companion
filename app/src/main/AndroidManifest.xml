@@ -19,7 +19,7 @@
         android:theme="@style/Theme.USARCompanion"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity3"
+            android:name=".ContentActivity"
             android:exported="false"
             android:label="@string/title_activity_main3" />
         <!--
