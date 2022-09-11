@@ -4,5 +4,5 @@ import com.squareup.moshi.Json
 import java.io.Serializable
 
 class FourthYearApiResponse (
-    @Json(name = "subjects") val subjects: List<Subject>
+    @Json(name = "branches") val branches: List<Branch>
 ): Serializable
