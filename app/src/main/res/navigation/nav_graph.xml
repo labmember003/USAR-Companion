@@ -63,7 +63,7 @@
         </activity>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.falcon.usarcompanion.ui.home.HomeFragment"
+        android:name="com.falcon.usarcompanion.ui.home.NotesFragment"
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_contentActivity"

@@ -9,13 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.falcon.usarcompanion.ContentActivity
-import com.falcon.usarcompanion.databinding.FragmentNotificationsBinding
+import com.falcon.usarcompanion.databinding.FragmentBooksBinding
 import com.falcon.usarcompanion.network.Section
 import com.falcon.usarcompanion.ui.main.RcvContentAdapter
 
-class NotificationsFragment : Fragment() {
+class BooksFragment : Fragment() {
 
-private var _binding: FragmentNotificationsBinding? = null
+private var _binding: FragmentBooksBinding? = null
   // This property is only valid between onCreateView and
   // onDestroyView.
   private val binding get() = _binding!!
@@ -26,9 +26,9 @@ private var _binding: FragmentNotificationsBinding? = null
     savedInstanceState: Bundle?
   ): View {
     val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+            ViewModelProvider(this).get(BooksViewModel::class.java)
 
-    _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+    _binding = FragmentBooksBinding.inflate(inflater, container, false)
     val root: View = binding.root
 /*
     val textView: TextView = binding.textNotifications

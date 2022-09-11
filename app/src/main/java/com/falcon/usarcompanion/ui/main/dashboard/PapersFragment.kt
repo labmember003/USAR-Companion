@@ -9,13 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.falcon.usarcompanion.ContentActivity
-import com.falcon.usarcompanion.databinding.FragmentSecondInBnvBinding
+import com.falcon.usarcompanion.databinding.FragmentPapersBinding
 import com.falcon.usarcompanion.network.Section
 import com.falcon.usarcompanion.ui.main.RcvContentAdapter
 
-class DashboardFragment : Fragment() {
+class PapersFragment : Fragment() {
 
-private var _binding: FragmentSecondInBnvBinding? = null
+private var _binding: FragmentPapersBinding? = null
   // This property is only valid between onCreateView and
   // onDestroyView.
   private val binding get() = _binding!!
@@ -26,9 +26,9 @@ private var _binding: FragmentSecondInBnvBinding? = null
     savedInstanceState: Bundle?
   ): View {
     val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+            ViewModelProvider(this).get(PapersViewModel::class.java)
 
-    _binding = FragmentSecondInBnvBinding.inflate(inflater, container, false)
+    _binding = FragmentPapersBinding.inflate(inflater, container, false)
     val root: View = binding.root
     /*
     val textView: TextView = binding.textDashboard

@@ -1,13 +1,13 @@
-package com.falcon.usarcompanion.ui.notifications
+package com.falcon.usarcompanion.ui.dashboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NotificationsViewModel : ViewModel() {
+class PapersViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "Books"
+        value = "paper"
     }
     val text: LiveData<String> = _text
 }

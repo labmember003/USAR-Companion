@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notifications.NotificationsFragment" >
+    tools:context=".ui.notifications.BooksFragment" >
 
     <TextView
         android:id="@+id/text_notifications"
@@ -29,7 +29,7 @@ xmlns:tools="http://schemas.android.com/tools">
 <data>
     <variable
         name="viewModel"
-        type="com.falcon.usarcompanion.ui.notifications.NotificationsViewModel"/>
+        type="com.falcon.usarcompanion.ui.notifications.BooksViewModel"/>
     <import type="android.view.View"/>
     <variable
         name="sale"
@@ -38,7 +38,7 @@ xmlns:tools="http://schemas.android.com/tools">
 <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notifications.NotificationsFragment">
+    tools:context=".ui.notifications.BooksFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvContentsBooks"

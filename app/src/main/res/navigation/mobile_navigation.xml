@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/navigation1"
-        android:name="com.falcon.usarcompanion.ui.home.HomeFragment"
+        android:name="com.falcon.usarcompanion.ui.home.NotesFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_notes" >
         <argument android:name="Notes"
             app:argType="com.falcon.usarcompanion.network.Section" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation2"
-        android:name="com.falcon.usarcompanion.ui.dashboard.DashboardFragment"
+        android:name="com.falcon.usarcompanion.ui.dashboard.PapersFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_second_in_bnv" >
+        tools:layout="@layout/fragment_papers" >
         <argument android:name="papers"
             app:argType="com.falcon.usarcompanion.network.Section" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation3"
-        android:name="com.falcon.usarcompanion.ui.notifications.NotificationsFragment"
+        android:name="com.falcon.usarcompanion.ui.notifications.BooksFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" >
+        tools:layout="@layout/fragment_books" >
         <argument android:name="books"
             app:argType="com.falcon.usarcompanion.network.Section" />
     </fragment>

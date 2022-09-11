@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.dashboard.DashboardFragment" >
+    tools:context=".ui.dashboard.PapersFragment" >
 
     <TextView
         android:id="@+id/text_dashboard"
@@ -29,7 +29,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.falcon.usarcompanion.ui.dashboard.DashboardViewModel"/>
+            type="com.falcon.usarcompanion.ui.dashboard.PapersViewModel"/>
         <import type="android.view.View"/>
         <variable
             name="sale"
@@ -38,7 +38,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.dashboard.DashboardFragment">
+        tools:context=".ui.dashboard.PapersFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvContentsPapers"

@@ -9,13 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.falcon.usarcompanion.ContentActivity
-import com.falcon.usarcompanion.databinding.FragmentHomeBinding
+import com.falcon.usarcompanion.databinding.FragmentNotesBinding
 import com.falcon.usarcompanion.network.Section
 import com.falcon.usarcompanion.ui.main.RcvContentAdapter
 
-class HomeFragment : Fragment() {
+class NotesFragment : Fragment() {
 
-private var _binding: FragmentHomeBinding? = null
+private var _binding: FragmentNotesBinding? = null
   // This property is only valid between onCreateView and
   // onDestroyView.
   private val binding get() = _binding!!
@@ -26,9 +26,9 @@ private var _binding: FragmentHomeBinding? = null
     savedInstanceState: Bundle?
   ): View {
     val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+            ViewModelProvider(this).get(NotesViewModel::class.java)
 
-    _binding = FragmentHomeBinding.inflate(inflater, container, false)
+    _binding = FragmentNotesBinding.inflate(inflater, container, false)
     val root: View = binding.root
 
       /*
