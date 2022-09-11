@@ -24,8 +24,8 @@
             android:id="@+id/action_FirstFragment_to_overviewFragment"
             app:destination="@id/overviewFragment" />
         <action
-            android:id="@+id/action_FirstFragment_to_blankFragment"
-            app:destination="@id/blankFragment" />
+            android:id="@+id/action_FirstFragment_to_BranchesTabbedFragment"
+            app:destination="@id/BranchesTabbedFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -70,12 +70,12 @@
             app:destination="@id/mainActivity3" />
     </fragment>
     <fragment
-        android:id="@+id/blankFragment"
+        android:id="@+id/BranchesTabbedFragment"
         android:name="com.falcon.usarcompanion.BranchesTabbedFragment"
         android:label="fragment_blank"
         tools:layout="@layout/fragment_blank" >
         <action
-            android:id="@+id/action_blankFragment_to_mainActivity3"
+            android:id="@+id/action_BranchesTabbedFragment_to_mainActivity3"
             app:destination="@id/mainActivity3" />
     </fragment>
 </navigation>

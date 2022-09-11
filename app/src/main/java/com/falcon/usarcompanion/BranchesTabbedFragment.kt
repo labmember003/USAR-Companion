@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil.setContentView
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
-import com.falcon.usarcompanion.databinding.ActivityYearTabbedBinding
+import com.falcon.usarcompanion.databinding.FragmentBranchesTabbedBinding
 import com.falcon.usarcompanion.ui.main.SectionsPagerAdapter
 import com.falcon.usarcompanion.ui.main.TAB_TITLES
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -19,17 +19,17 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class BranchesTabbedFragment : Fragment() {
 
-    private lateinit var binding: ActivityYearTabbedBinding
+    private lateinit var binding: FragmentBranchesTabbedBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = ActivityYearTabbedBinding.inflate(layoutInflater, container, false)
+        binding = FragmentBranchesTabbedBinding.inflate(layoutInflater, container, false)
         val sectionsPagerAdapter = SectionsPagerAdapter(this) { subject ->
             val bundle = Bundle()
             bundle.putSerializable("CurrentSubject", subject)
-            findNavController().navigate(R.id.action_blankFragment_to_mainActivity3, bundle)
+            findNavController().navigate(R.id.action_BranchesTabbedFragment_to_mainActivity3, bundle)
         }
         val viewPager = binding.viewPager
         viewPager.adapter = sectionsPagerAdapter
