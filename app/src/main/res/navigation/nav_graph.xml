@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_BranchesTabbedFragment"
             app:destination="@id/BranchesTabbedFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_resources"
+            app:destination="@id/resources" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -77,5 +80,14 @@
         <action
             android:id="@+id/action_BranchesTabbedFragment_to_contentActivity"
             app:destination="@id/contentActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/resources"
+        android:name="com.falcon.usarcompanion.Resources"
+        android:label="fragment_resources"
+        tools:layout="@layout/fragment_resources" >
+        <action
+            android:id="@+id/action_resources_to_BranchesTabbedFragment"
+            app:destination="@id/BranchesTabbedFragment" />
     </fragment>
 </navigation>

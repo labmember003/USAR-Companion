@@ -15,6 +15,7 @@ val TAB_TITLES = arrayOf(
 
 class SectionsPagerAdapter(
     fragment: Fragment,
+    currentYear: Int?,
     private val onSubjectClick: (subject: Subject) -> Unit
 ) : FragmentStateAdapter(fragment) {
     override fun getItemCount() = TAB_TITLES.size

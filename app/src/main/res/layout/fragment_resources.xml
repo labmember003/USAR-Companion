@@ -18,28 +18,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|left"
-        tools:src="@tools:sample/avatars" />
+        app:srcCompat="@android:drawable/btn_default"
+        />
 
     <ImageView
         android:id="@+id/year2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|right"
-        tools:src="@tools:sample/avatars" />
+        tools:src="@tools:sample/avatars"
+        app:srcCompat="@android:drawable/btn_default"
+        />
 
     <ImageView
         android:id="@+id/year3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|left"
-        tools:src="@tools:sample/avatars" />
+        tools:src="@tools:sample/avatars"
+        app:srcCompat="@android:drawable/btn_default"
+        />
 
     <ImageView
         android:id="@+id/year4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        tools:src="@tools:sample/avatars" />
+        tools:src="@tools:sample/avatars"
+        app:srcCompat="@android:drawable/btn_default"
+        />
 
 
 </FrameLayout>

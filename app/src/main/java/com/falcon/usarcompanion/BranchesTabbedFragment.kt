@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil.setContentView
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
@@ -25,8 +26,11 @@ class BranchesTabbedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
+        val currentYear = arguments?.getInt("Year")
+        //val currentYear = savedInstanceState?.getInt("Year")
+        Toast.makeText(activity, "${currentYear}", Toast.LENGTH_SHORT).show()
         binding = FragmentBranchesTabbedBinding.inflate(layoutInflater, container, false)
-        val sectionsPagerAdapter = SectionsPagerAdapter(this) { subject ->
+        val sectionsPagerAdapter = SectionsPagerAdapter(this, currentYear) { subject ->
             val bundle = Bundle()
             bundle.putSerializable("CurrentSubject", subject)
             findNavController().navigate(R.id.action_BranchesTabbedFragment_to_contentActivity, bundle)

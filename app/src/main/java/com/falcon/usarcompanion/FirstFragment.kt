@@ -40,7 +40,8 @@ class FirstFragment : Fragment() {
             //findNavController().navigate(R.id.action_FirstFragment_to_aboutFragment)
             //findNavController().navigate(R.id.action_FirstFragment_to_yearTabbedActivity)
             //findNavController().navigate(R.id.action_FirstFragment_to_overviewFragment)
-            findNavController().navigate(R.id.action_FirstFragment_to_BranchesTabbedFragment)
+            //findNavController().navigate(R.id.action_FirstFragment_to_BranchesTabbedFragment)
+            findNavController().navigate(R.id.action_FirstFragment_to_resources)
         }
     }
 
