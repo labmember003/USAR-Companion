@@ -33,7 +33,6 @@ class Resources : Fragment() {
         //return inflater.inflate(R.layout.fragment_resources, container, false)
         _binding = FragmentResourcesBinding.inflate(inflater, container, false)
         var currentYear = 0
-
         listOf(binding.year1, binding.year2, binding.year3, binding.year4).forEach{
             currentYear++
             val bundle = Bundle()
@@ -45,6 +44,14 @@ class Resources : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        getActionBar()!!.setTitle("USAR Companion")
+    }
+
+    private fun getActionBar(): androidx.appcompat.app.ActionBar? {
+        return (activity as MainActivity?)!!.getSupportActionBar()
+    }
 
 
 }
