@@ -23,19 +23,19 @@ interface YearDataApiService {
     @GET("YEAR_1/data.json")
     fun getFirstYearData():
             Deferred<FirstYearApiResponse>
-    /*
-    @GET("YEAR_2")
+
+    @GET("YEAR_2/data.json")
     fun getSecondYearData():
             Deferred<SecondYearApiResponse>
 
-    @GET("YEAR_3")
+    @GET("YEAR_3/data.json")
     fun getThirdYearData():
             Deferred<ThirdYearApiResponse>
 
-    @GET("YEAR_4")
+    @GET("YEAR_4/data.json")
     fun getFourthYearData():
             Deferred<FourthYearApiResponse>
-     */
+
 }
 
 interface FileApiService{

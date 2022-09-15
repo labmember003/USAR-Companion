@@ -37,12 +37,32 @@ class SubjectsViewModel(
 
         Toast.makeText(getApplication(), currentYearForViewModel.toString(), Toast.LENGTH_LONG).show()
         Toast.makeText(getApplication(), currentBranchForViewModel.toString(), Toast.LENGTH_LONG).show()
+        var hashmap = hashMapOf("AIDS" to 0, "AIML" to 1, "IIOT" to 2, "AR" to 3)
         coroutineScope.launch {
             try {
-
+                if (currentYearForViewModel == 1) {
+                    val data = Api.yearDataApiService.getFirstYearData().await().subjects
+                    _subjects.value = data
+                    _isDataFetchSuccessful.value = true
+                } else if (currentYearForViewModel == 2) {
+                    val data = Api.yearDataApiService.getSecondYearData().await().branches[hashmap[currentBranchForViewModel]!!].subjects
+                    //val data = Api.yearDataApiService.getSecondYearData().await().branches[1].subjects
+                    _subjects.value = data
+                    _isDataFetchSuccessful.value = true
+                } else if (currentYearForViewModel == 3) {
+                    val data = Api.yearDataApiService.getThirdYearData().await().branches[hashmap[currentBranchForViewModel]!!].subjects
+                    _subjects.value = data
+                    _isDataFetchSuccessful.value = true
+                } else if (currentYearForViewModel == 4) {
+                    val data = Api.yearDataApiService.getFourthYearData().await().branches[hashmap[currentBranchForViewModel]!!].subjects
+                    _subjects.value = data
+                    _isDataFetchSuccessful.value = true
+                }
+                /*
                 val data = Api.yearDataApiService.getFirstYearData().await().subjects
                 _subjects.value = data
                 _isDataFetchSuccessful.value = true
+                 */
             } catch (e: Exception) {
                 Log.e("tatti", e.stackTraceToString())
                 _subjects.value = null

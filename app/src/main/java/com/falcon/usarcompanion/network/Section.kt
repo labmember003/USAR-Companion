@@ -6,7 +6,7 @@ import java.io.Serializable
 
 data class Section (
     @Json(name = "title") val title: String,
-    @Json(name = "icon_url") val iconSrc: String,
+    @Json(name = "icon_url") val iconSrc: String = "",
     @Json(name = "contents") val contents: List<Content>
 ): Serializable
 
