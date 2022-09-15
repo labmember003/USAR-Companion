@@ -51,6 +51,8 @@ class RcvContentAdapter(val context: Context, private val contents: List<Content
             holder.icon.setImageResource(R.drawable.exam)
         } else if (sectionType == "books") {
             holder.icon.setImageResource(R.drawable.book)
+        } else if (sectionType == "Playlists") {
+            holder.icon.setImageResource(R.drawable.playlisticon)
         }
 
     }
