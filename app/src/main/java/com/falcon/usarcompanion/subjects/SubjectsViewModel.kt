@@ -1,9 +1,11 @@
 package com.falcon.usarcompanion.subjects
 
+import android.app.Application
 import android.util.Log
+import android.widget.Toast
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.falcon.usarcompanion.network.Api
 import com.falcon.usarcompanion.network.Subject
 import kotlinx.coroutines.CoroutineScope
@@ -11,7 +13,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class SubjectsViewModel : ViewModel() {
+class SubjectsViewModel(
+    application: Application
+) : AndroidViewModel(application) {
+
+
     private val _isDataFetchSuccessful = MutableLiveData<Boolean>(true)
     val isDataFetchSuccessful: LiveData<Boolean>
         get() = _isDataFetchSuccessful
@@ -28,8 +34,12 @@ class SubjectsViewModel : ViewModel() {
     }
 
     private fun getData() {
+
+        Toast.makeText(getApplication(), currentYearForViewModel.toString(), Toast.LENGTH_LONG).show()
+        Toast.makeText(getApplication(), currentBranchForViewModel.toString(), Toast.LENGTH_LONG).show()
         coroutineScope.launch {
             try {
+
                 val data = Api.yearDataApiService.getFirstYearData().await().subjects
                 _subjects.value = data
                 _isDataFetchSuccessful.value = true
@@ -43,6 +53,10 @@ class SubjectsViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
+
         viewModelJob.cancel()
     }
 }
+
+
+//Toast.makeText(contexts, "mausi" + currentYear.toString(), Toast.LENGTH_LONG).show()

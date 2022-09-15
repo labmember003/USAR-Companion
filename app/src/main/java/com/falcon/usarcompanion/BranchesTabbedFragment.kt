@@ -22,7 +22,7 @@ class BranchesTabbedFragment : Fragment() {
         val currentYear = arguments?.getInt("Year")
         Toast.makeText(activity, "$currentYear", Toast.LENGTH_SHORT).show()
         binding = FragmentBranchesTabbedBinding.inflate(layoutInflater, container, false)
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, currentYear) { subject ->
+        val sectionsPagerAdapter = SectionsPagerAdapter(requireContext(), this, currentYear) { subject ->
             val bundle = Bundle()
             bundle.putSerializable("CurrentSubject", subject)
             findNavController().navigate(R.id.action_BranchesTabbedFragment_to_contentActivity, bundle)
