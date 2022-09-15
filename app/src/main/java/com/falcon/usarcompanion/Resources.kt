@@ -46,7 +46,17 @@ class Resources : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getActionBar()!!.setTitle("USAR Companion")
+        //(activity as MainActivity).actionBar?.setTitle("mausi")
+        //getActionBar()!!.setTitle("USAR Companion")
+
+        /*
+        // making resource fragment as start destination
+        1. NavGraph mei start destination ko first fragment se resource fragment kr diya
+        2. resources fragment mei onViewCreated mei getActionBar waala chla rrhe the usko comment kr diya but aciton bar name ki problem fix nhi hui
+        3. project level search kiya "fragment_resources", nav graph mei ek label milla usko change kr diya jo chahiye usmei..
+        replaced it with "@string/app_name"
+        */
+
     }
 
     private fun getActionBar(): androidx.appcompat.app.ActionBar? {
