@@ -6,6 +6,8 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.falcon.usarcompanion.model.Branch
+import com.falcon.usarcompanion.model.Year
 import com.falcon.usarcompanion.network.Api
 import com.falcon.usarcompanion.network.Subject
 import kotlinx.coroutines.CoroutineScope
@@ -13,10 +15,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
+data class SubjectsViewModelData(
+    val currentBranch: Branch,
+    val currentYear: Year
+)
+
 class SubjectsViewModel(
     application: Application
 ) : AndroidViewModel(application) {
-
 
     private val _isDataFetchSuccessful = MutableLiveData<Boolean>(true)
     val isDataFetchSuccessful: LiveData<Boolean>
@@ -29,46 +35,39 @@ class SubjectsViewModel(
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
 
-    init {
-        getData()
-    }
+    private lateinit var currentData: SubjectsViewModelData
 
-    private fun getData() {
+    private fun fetchData() {
 
-        Toast.makeText(getApplication(), currentYearForViewModel.toString(), Toast.LENGTH_LONG).show()
-        Toast.makeText(getApplication(), currentBranchForViewModel.toString(), Toast.LENGTH_LONG).show()
-        var hashmap = hashMapOf("AIDS" to 0, "AIML" to 1, "IIOT" to 2, "AR" to 3)
+        Toast.makeText(getApplication(), currentData.currentYear.displayName, Toast.LENGTH_LONG).show()
+        Toast.makeText(getApplication(), currentData.currentBranch.displayName, Toast.LENGTH_LONG).show()
         coroutineScope.launch {
             try {
-                if (currentYearForViewModel == 1) {
-                    val data = Api.yearDataApiService.getFirstYearData().await().subjects
-                    _subjects.value = data
-                    _isDataFetchSuccessful.value = true
-                } else if (currentYearForViewModel == 2) {
-                    val data = Api.yearDataApiService.getSecondYearData().await().branches[hashmap[currentBranchForViewModel]!!].subjects
-                    //val data = Api.yearDataApiService.getSecondYearData().await().branches[1].subjects
-                    _subjects.value = data
-                    _isDataFetchSuccessful.value = true
-                } else if (currentYearForViewModel == 3) {
-                    val data = Api.yearDataApiService.getThirdYearData().await().branches[hashmap[currentBranchForViewModel]!!].subjects
-                    _subjects.value = data
-                    _isDataFetchSuccessful.value = true
-                } else if (currentYearForViewModel == 4) {
-                    val data = Api.yearDataApiService.getFourthYearData().await().branches[hashmap[currentBranchForViewModel]!!].subjects
-                    _subjects.value = data
-                    _isDataFetchSuccessful.value = true
+                val data = when(currentData.currentYear) {
+                    Year.FIRST -> Api.yearDataApiService.getFirstYearData().await().subjects
+                    Year.SECOND -> getBranch(Api.yearDataApiService.getSecondYearData().await().branches, currentData.currentBranch.displayName).subjects
+                    Year.THIRD -> getBranch(Api.yearDataApiService.getThirdYearData().await().branches, currentData.currentBranch.displayName).subjects
+                    Year.FOURTH -> getBranch(Api.yearDataApiService.getFourthYearData().await().branches, currentData.currentBranch.displayName).subjects
                 }
-                /*
-                val data = Api.yearDataApiService.getFirstYearData().await().subjects
                 _subjects.value = data
                 _isDataFetchSuccessful.value = true
-                 */
             } catch (e: Exception) {
                 Log.e("tatti", e.stackTraceToString())
                 _subjects.value = null
                 _isDataFetchSuccessful.value = false
             }
         }
+    }
+
+
+    private fun getBranch(branches: List<com.falcon.usarcompanion.network.Branch>, branchName: String): com.falcon.usarcompanion.network.Branch {
+        return branches.find { it.branchName == branchName }!!
+    }
+
+
+    fun setCurrentData(data: SubjectsViewModelData) {
+        this.currentData = data
+        fetchData()
     }
 
     override fun onCleared() {
