@@ -1,42 +1,55 @@
 package com.falcon.usarcompanion
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
-import androidx.drawerlayout.widget.DrawerLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.navigateUp
 import com.falcon.usarcompanion.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity()  {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    private lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        drawerLayout = binding.drawerLayout
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        NavigationUI.navigateUp(navController, drawerLayout)
+        NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout)
+        NavigationUI.setupWithNavController(binding.navView, navController)
 
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAnchorView(R.id.fab)
                 .setAction("Action", null).show()
+        }
+
+        binding.navView.setNavigationItemSelectedListener {
+             if (it.itemId == R.id.getDirections) {
+                 val intent = Intent(
+                     Intent.ACTION_VIEW,
+                     Uri.parse("http://maps.google.com/maps?34.34&daddr=28.66488568388205,77.30043327394083")
+                 )
+                 binding.drawerLayout.close()
+                 startActivity(intent)
+                 return@setNavigationItemSelectedListener true
+            }
+            val handled = NavigationUI.onNavDestinationSelected(it, navController)
+            if (handled) {
+                binding.drawerLayout.close()
+            }
+            handled
         }
     }
 
@@ -58,7 +71,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
+        return navController.navigateUp(binding.drawerLayout)
                 || super.onSupportNavigateUp()
+    }
+
+    override fun onBackPressed() {
+        if (binding.drawerLayout.isOpen) {
+            binding.drawerLayout.close()
+        } else {
+            super.onBackPressed()
+        }
     }
 }

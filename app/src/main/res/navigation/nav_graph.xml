@@ -43,12 +43,12 @@
     <fragment
         android:id="@+id/campusMap"
         android:name="com.falcon.usarcompanion.CampusMap"
-        android:label="fragment_campus_map"
+        android:label="Campus Map"
         tools:layout="@layout/fragment_campus_map" />
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.falcon.usarcompanion.AboutFragment"
-        android:label="fragment_about">
+        android:label="About">
     </fragment>
     <fragment
         android:id="@+id/subjectsFragment"

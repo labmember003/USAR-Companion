@@ -1,12 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    >
 
-    <item
-        android:icon="@android:drawable/ic_menu_info_details"
-        android:title="@string/about" />
-    <item android:title="@string/resources" />
-    <item
-        android:icon="@android:drawable/ic_menu_directions"
-        android:title="@string/get_directions" />
-    <item android:title="@string/societies" />
+    <group
+        android:id="@+id/group1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/aboutFragment"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="@string/about"
+            android:checked="true" />
+        <item
+            android:id="@+id/resources"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="@string/resources" />
+        <item
+            android:id="@+id/campusMap"
+            android:icon="@android:drawable/ic_menu_directions"
+            android:title="Campus Map"
+            />
+    </group>
+
+    <group
+        android:id="@+id/group2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/getDirections"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="@string/get_directions"
+            android:checkable="false" />
+        <item
+            android:id="@+id/item21"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="@string/resources" />
+        <item
+            android:id="@+id/item31"
+            android:icon="@android:drawable/ic_menu_directions"
+            android:title="@string/get_directions"
+            />
+    </group>
 </menu>
