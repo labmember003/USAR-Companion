@@ -45,6 +45,17 @@ class MainActivity : AppCompatActivity()  {
                  startActivity(intent)
                  return@setNavigationItemSelectedListener true
             }
+            else if (it.itemId == R.id.share) {
+                 val sendIntent: Intent = Intent().apply {
+                     action = Intent.ACTION_SEND
+                     putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}")
+                     type = "text/plain"
+                 }
+                 val shareIntent = Intent.createChooser(sendIntent, null)
+                 startActivity(shareIntent)
+                 binding.drawerLayout.close()
+                 return@setNavigationItemSelectedListener true
+             }
             val handled = NavigationUI.onNavDestinationSelected(it, navController)
             if (handled) {
                 binding.drawerLayout.close()

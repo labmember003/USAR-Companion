@@ -32,9 +32,9 @@
             android:title="@string/get_directions"
             android:checkable="false" />
         <item
-            android:id="@+id/item21"
+            android:id="@+id/share"
             android:icon="@android:drawable/ic_menu_info_details"
-            android:title="@string/resources" />
+            android:title="@string/share" />
         <item
             android:id="@+id/item31"
             android:icon="@android:drawable/ic_menu_directions"
