@@ -15,10 +15,10 @@
 
     <ImageView
         android:id="@+id/year1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_gravity="top|left"
-        app:srcCompat="@android:drawable/btn_default"
+        app:srcCompat="@drawable/year_first_icon"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -30,11 +30,11 @@
 
     <ImageView
         android:id="@+id/year2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_gravity="top|right"
         tools:src="@tools:sample/avatars"
-        app:srcCompat="@android:drawable/btn_default"
+        app:srcCompat="@drawable/year_second_icon"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -46,11 +46,11 @@
 
     <ImageView
         android:id="@+id/year3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_gravity="bottom|left"
         tools:src="@tools:sample/avatars"
-        app:srcCompat="@android:drawable/btn_default"
+        app:srcCompat="@drawable/year_third_icon"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -62,11 +62,11 @@
 
     <ImageView
         android:id="@+id/year4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_gravity="bottom|right"
         tools:src="@tools:sample/avatars"
-        app:srcCompat="@android:drawable/btn_default"
+        app:srcCompat="@drawable/year_fourth_icon"
         />
     <TextView
         android:layout_width="wrap_content"
