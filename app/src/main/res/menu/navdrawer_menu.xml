@@ -9,16 +9,16 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/aboutFragment"
-            android:icon="@android:drawable/ic_menu_info_details"
+            android:icon="@drawable/ic_baseline_info_25"
             android:title="@string/about"
             android:checked="true" />
         <item
             android:id="@+id/resources"
-            android:icon="@android:drawable/ic_menu_info_details"
+            android:icon="@drawable/ic_baseline_edit_24"
             android:title="@string/resources" />
         <item
             android:id="@+id/campusMap"
-            android:icon="@android:drawable/ic_menu_directions"
+            android:icon="@drawable/ic_baseline_map_24"
             android:title="Campus Map"
             />
     </group>
@@ -28,17 +28,12 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/getDirections"
-            android:icon="@android:drawable/ic_menu_info_details"
+            android:icon="@drawable/ic_baseline_directions_24"
             android:title="@string/get_directions"
             android:checkable="false" />
         <item
             android:id="@+id/share"
-            android:icon="@android:drawable/ic_menu_info_details"
+            android:icon="@drawable/ic_baseline_share_24"
             android:title="@string/share" />
-        <item
-            android:id="@+id/item31"
-            android:icon="@android:drawable/ic_menu_directions"
-            android:title="@string/get_directions"
-            />
     </group>
 </menu>
