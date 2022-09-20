@@ -16,6 +16,12 @@
         android:icon="@android:drawable/arrow_down_float"
         android:title="Books" />
 
+    <item
+        android:id="@+id/navigation4"
+        android:icon="@android:drawable/arrow_down_float"
+        android:title="Playlists" />
+
+
 
 
 </menu>

@@ -63,11 +63,12 @@ private lateinit var binding: ActivityContentBinding
         val result = intent.extras?.getSerializable("CurrentSubject") as Subject
         Log.i("aapkimausi", result.subjectName)
 
-        val bundleNotes = Bundle(); val bundlePaper = Bundle(); val bundleBooks = Bundle()
+        val bundleNotes = Bundle(); val bundlePaper = Bundle()
+        val bundleBooks = Bundle(); val bundlePlaylist = Bundle(); val bundleSyallabus = Bundle()
         //bundleNotes.putSerializable("Notes", result.sections[0]) // 0 for notes and files 1 for papers and 2 for books
-        val bundleKeyList = listOf<String>("Notes", "papers", "books")
-        val bundleList = listOf<Bundle>(bundleNotes, bundlePaper, bundleBooks)
-        for (i in 0..2) {
+        val bundleKeyList = listOf<String>("Notes", "papers", "books", "Playlists")
+        val bundleList = listOf<Bundle>(bundleNotes, bundlePaper, bundleBooks, bundlePlaylist)
+        for (i in 0..3) {
             bundleList[i].putSerializable(bundleKeyList[i], result.sections[i])
             // if array pass krni ho tho :-
             //bundleList[i].putSerializable(bundleKeyList[i],ArrayList(result.sections))
@@ -86,7 +87,7 @@ private lateinit var binding: ActivityContentBinding
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation1, R.id.navigation2, R.id.navigation3))
+            R.id.navigation1, R.id.navigation2, R.id.navigation3, R.id.navigation4))
         setupActionBarWithNavController(navController, appBarConfiguration)
         // navView.setupWithNavController(navController)
         Log.i("aapkimausi", result.sections[0].title)
@@ -110,6 +111,8 @@ private lateinit var binding: ActivityContentBinding
                 navController.navigate(item.itemId, bundlePaper)
             } else if (item.itemId == R.id.navigation3) {
                 navController.navigate(item.itemId, bundleBooks)
+            } else if (item.itemId == R.id.navigation4) {
+                navController.navigate(item.itemId, bundlePlaylist)
             }
             true
         }

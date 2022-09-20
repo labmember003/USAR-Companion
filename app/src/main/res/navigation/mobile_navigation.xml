@@ -31,4 +31,13 @@
         <argument android:name="books"
             app:argType="com.falcon.usarcompanion.network.Section" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation4"
+        android:name="com.falcon.usarcompanion.ui.main.playlists.PlaylistsFragment"
+        android:label="Playlists"
+        tools:layout="@layout/fragment_playlists">
+        <argument android:name="Playlists"
+            app:argType="com.falcon.usarcompanion.network.Section"/>
+    </fragment>
+
 </navigation>

@@ -35,5 +35,6 @@
             android:id="@+id/share"
             android:icon="@drawable/ic_baseline_share_24"
             android:title="@string/share" />
+
     </group>
 </menu>
