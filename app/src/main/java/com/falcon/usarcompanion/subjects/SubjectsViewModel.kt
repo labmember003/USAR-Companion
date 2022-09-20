@@ -32,6 +32,8 @@ class SubjectsViewModel(
     val subjects: LiveData<List<Subject>?>
         get() = _subjects
 
+    val hideLoadAnimation = MutableLiveData<Boolean>(false)
+
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
 
@@ -49,6 +51,7 @@ class SubjectsViewModel(
                     Year.THIRD -> getBranch(Api.yearDataApiService.getThirdYearData().await().branches, currentData.currentBranch.displayName).subjects
                     Year.FOURTH -> getBranch(Api.yearDataApiService.getFourthYearData().await().branches, currentData.currentBranch.displayName).subjects
                 }
+                hideLoadAnimation.value = true
                 _subjects.value = data
                 _isDataFetchSuccessful.value = true
             } catch (e: Exception) {

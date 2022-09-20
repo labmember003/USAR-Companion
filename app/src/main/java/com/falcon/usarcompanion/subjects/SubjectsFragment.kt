@@ -1,17 +1,16 @@
 package com.falcon.usarcompanion.subjects
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.falcon.usarcompanion.databinding.FragmentSubjectsBinding
 import com.falcon.usarcompanion.model.Year
-import com.falcon.usarcompanion.network.Branch
 import com.falcon.usarcompanion.network.Subject
 
 
@@ -30,9 +29,8 @@ class SubjectsFragment : Fragment()  {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = FragmentSubjectsBinding.inflate(inflater)
-
         val currentYear = arguments?.getSerializable(ARG_CURRENT_YEAR) as Year
         val currentBranch = arguments?.getSerializable(ARG_CURRENT_BRANCH) as com.falcon.usarcompanion.model.Branch
         viewModel.setCurrentData(
@@ -41,6 +39,7 @@ class SubjectsFragment : Fragment()  {
                 currentYear = currentYear
             )
         )
+        binding.imagePendingAnimation.isVisible = true
         //Toast.makeText(context, "sbki mausi " + currentBranchForViewModel, Toast.LENGTH_LONG).show()
         Log.i("currentYear", currentYear.toString())
         //Toast.makeText(context, "mausi " + currentYear.toString(), Toast.LENGTH_LONG).show()
@@ -67,9 +66,11 @@ class SubjectsFragment : Fragment()  {
                 }
             }
             val adapter = SubjectAdapter(requireContext(), oddSemesterSubjects, evenSemesterSubjects, ::onSubjectClick)
+
             //val map = subjects.groupBy { if (it.semester == "odd") "o" else "e" }
             //val adapter = SubjectAdapter(requireContext(), map["o"] ?: listOf(), map["e"] ?: listOf())
             binding.rvSubjects.adapter = adapter
+
         }
 
         viewModel.isDataFetchSuccessful.observe(viewLifecycleOwner) {
@@ -77,12 +78,20 @@ class SubjectsFragment : Fragment()  {
                 binding.tvErrorMessage.isVisible = false
             } else {
                 binding.tvErrorMessage.isVisible = true
+                binding.imagePendingAnimation.isVisible = false
+                binding.errorAnimation.isVisible = true
+            }
+        }
+
+        viewModel.hideLoadAnimation.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.imagePendingAnimation.isVisible = false
             }
         }
         return binding.root
     }
 
-    fun onSubjectClick(currentSubject: Subject) : Unit {
+    private fun onSubjectClick(currentSubject: Subject) {
         onPerformNavigation?.invoke(currentSubject)
     }
 

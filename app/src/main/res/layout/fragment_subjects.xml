@@ -20,9 +20,30 @@
         <TextView
             android:id="@+id/tvErrorMessage"
             android:visibility="gone"
-            android:text="Failed to load. Please retry"
+            android:text="Something Went Wrong !!"
             android:layout_gravity="center"
+            android:translationZ="90dp"
+            android:layout_marginTop="130dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/image_pending_animation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:lottie_rawRes="@raw/loading_cats"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/error_animation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:lottie_rawRes="@raw/error_cat"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            android:visibility="invisible"/>
+
     </FrameLayout>
 </layout>

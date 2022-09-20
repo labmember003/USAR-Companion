@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.falcon.usarcompanion.R
 import com.falcon.usarcompanion.network.Subject
 
+
 private const val TYPE_HEADLINE = 0
 private const val TYPE_SUBJECT = 1
 
@@ -24,7 +25,6 @@ class SubjectItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
     var subjectIcon = itemView.findViewById<ImageView>(R.id.subjectIcon)
     var subjectName = itemView.findViewById<TextView>(R.id.subjectName)
 }
-
 
 
 class SubjectAdapter(
@@ -55,7 +55,7 @@ class SubjectAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.rootView.setOnClickListener{
             /*
-            NAVIGATION KA CODE (OBVIOUSLY WITHOUT ARGUEMENTS)
+            NAVIGATION KA CODE (OBVIOUSLY WITHOUT ARGUMENTS)
             val navController = Navigation.findNavController(it)
             navController.navigate(R.id.FirstFragment)
              */
@@ -84,6 +84,7 @@ class SubjectAdapter(
             else -> throw IllegalStateException("Unknown holder: $holder")
         }
     }
+
 
     private fun getSubject(position: Int) : Subject {
         if (isOddSemester(position)) {
