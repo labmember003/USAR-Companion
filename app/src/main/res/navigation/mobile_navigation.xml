@@ -39,5 +39,12 @@
         <argument android:name="Playlists"
             app:argType="com.falcon.usarcompanion.network.Section"/>
     </fragment>
-
+    <fragment
+        android:id="@+id/navigation5"
+        android:name="com.falcon.usarcompanion.ui.main.syllabus.SyllabusFragment"
+        android:label="Syllabus"
+        tools:layout="@layout/fragment_syllabus">
+        <argument android:name="Syllabus"
+            app:argType="com.falcon.usarcompanion.network.Section" />
+    </fragment>
 </navigation>

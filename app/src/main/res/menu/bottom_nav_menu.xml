@@ -21,6 +21,11 @@
         android:icon="@android:drawable/arrow_down_float"
         android:title="Playlists" />
 
+    <item
+        android:id="@+id/navigation5"
+        android:icon="@android:drawable/arrow_down_float"
+        android:title="Syllabus" />
+
 
 
 
