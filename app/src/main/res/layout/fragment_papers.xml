@@ -50,7 +50,19 @@
             android:visibility="@{sale ? View.VISIBLE : View.GONE}"
             android:text="Coming Soon :)"
             android:layout_gravity="center"
+            android:translationZ="90dp"
+            android:layout_marginTop="160dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/coming_soon_animation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:lottie_rawRes="@raw/coming_soon_cat"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            android:visibility="@{sale ? View.VISIBLE : View.GONE}"
+            />
     </FrameLayout>
 </layout>
