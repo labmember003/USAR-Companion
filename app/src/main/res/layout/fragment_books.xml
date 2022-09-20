@@ -61,6 +61,7 @@ xmlns:tools="http://schemas.android.com/tools">
         android:layout_height="match_parent"
         app:lottie_rawRes="@raw/coming_soon_cat"
         app:lottie_autoPlay="true"
+        android:layout_marginRight="15dp"
         app:lottie_loop="true"
         android:visibility="@{sale ? View.VISIBLE : View.GONE}"
         />
