@@ -1,18 +1,21 @@
 package com.falcon.usarcompanion.ui.main.playlists
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.falcon.usarcompanion.ContentActivity
 import com.falcon.usarcompanion.databinding.FragmentPlaylistsBinding
 import com.falcon.usarcompanion.network.Section
-import com.falcon.usarcompanion.ui.home.NotesViewModel
 import com.falcon.usarcompanion.ui.main.RcvContentAdapter
+
 
 class PlaylistsFragment : Fragment() {
     private var _binding: FragmentPlaylistsBinding? = null
@@ -66,7 +69,20 @@ class PlaylistsFragment : Fragment() {
         }
      */
     fun onContentClick(fileURL: String, titleAndFileName: String) {
-        (activity as ContentActivity?)!!.startDownloading(fileURL, titleAndFileName)
+        //(activity as ContentActivity?)!!.startDownloading(fileURL, titleAndFileName)
+        openPlaylist(fileURL)
+    }
+    private fun openPlaylist (fileURL: String) {
+        val appIntent = Intent(Intent.ACTION_VIEW, Uri.parse(fileURL))
+        val webIntent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse(fileURL)
+        )
+        try {
+            startActivity(appIntent)
+        } catch (ex: ActivityNotFoundException) {
+            startActivity(webIntent)
+        }
     }
 
 }
