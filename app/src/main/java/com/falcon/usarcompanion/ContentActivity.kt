@@ -60,6 +60,7 @@ private lateinit var binding: ActivityContentBinding
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         val navView: BottomNavigationView = binding.navView
+        navView.itemIconTintList = null
         val result = intent.extras?.getSerializable("CurrentSubject") as Subject
         Log.i("aapkimausi", result.subjectName)
 
@@ -118,6 +119,7 @@ private lateinit var binding: ActivityContentBinding
             }
             true
         }
+
 
     }
 
