@@ -20,7 +20,7 @@ class BranchesTabbedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val currentYear = arguments?.getInt("Year")
-        Toast.makeText(activity, "$currentYear", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(activity, "$currentYear", Toast.LENGTH_SHORT).show()
         binding = FragmentBranchesTabbedBinding.inflate(layoutInflater, container, false)
         val sectionsPagerAdapter = SectionsPagerAdapter(requireContext(), this, currentYear) { subject ->
             val bundle = Bundle()

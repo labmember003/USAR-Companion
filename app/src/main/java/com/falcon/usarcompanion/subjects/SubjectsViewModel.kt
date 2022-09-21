@@ -41,8 +41,8 @@ class SubjectsViewModel(
 
     private fun fetchData() {
 
-        Toast.makeText(getApplication(), currentData.currentYear.displayName, Toast.LENGTH_LONG).show()
-        Toast.makeText(getApplication(), currentData.currentBranch.displayName, Toast.LENGTH_LONG).show()
+        //Toast.makeText(getApplication(), currentData.currentYear.displayName, Toast.LENGTH_LONG).show()
+        //Toast.makeText(getApplication(), currentData.currentBranch.displayName, Toast.LENGTH_LONG).show()
         coroutineScope.launch {
             try {
                 val data = when(currentData.currentYear) {

@@ -45,7 +45,7 @@ private lateinit var binding: ActivityContentBinding
                 arrayOf(WRITE_EXTERNAL_STORAGE),
                 12);
         } else {
-            Toast.makeText(this, "Permission mil gyi ", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "Permission mil gyi ", Toast.LENGTH_SHORT).show()
             //startDownloading()
         }
 
