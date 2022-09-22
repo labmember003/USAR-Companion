@@ -3,14 +3,13 @@ package com.falcon.usarcompanion
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
 import com.falcon.usarcompanion.databinding.ActivityMainBinding
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -30,6 +29,7 @@ class MainActivity : AppCompatActivity()  {
         NavigationUI.setupWithNavController(binding.navView, navController)
 
         binding.fab.setOnClickListener { view ->
+            startActivity(Intent(this, OssLicensesMenuActivity::class.java))
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAnchorView(R.id.fab)
                 .setAction("Action", null).show()
