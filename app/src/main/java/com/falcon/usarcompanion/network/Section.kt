@@ -2,8 +2,10 @@ package com.falcon.usarcompanion.network
 
 import com.falcon.usarcompanion.network.Content
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import java.io.Serializable
 
+@JsonClass(generateAdapter = true)
 data class Section (
     @Json(name = "title") val title: String,
     @Json(name = "icon_url") val iconSrc: String = "",

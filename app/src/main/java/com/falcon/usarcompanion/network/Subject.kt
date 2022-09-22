@@ -2,8 +2,10 @@ package com.falcon.usarcompanion.network
 
 import com.falcon.usarcompanion.network.Section
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import java.io.Serializable
 
+@JsonClass(generateAdapter = true)
 data class Subject (
     @Json(name = "sub_name") val subjectName: String,
     @Json(name = "semester") val semester: String,
