@@ -8,11 +8,6 @@
         android:id="@+id/group1"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/aboutFragment"
-            android:icon="@drawable/ic_baseline_info_25"
-            android:title="@string/about"
-            android:checked="true" />
-        <item
             android:id="@+id/resources"
             android:icon="@drawable/ic_baseline_edit_24"
             android:title="@string/resources" />
@@ -35,6 +30,10 @@
             android:id="@+id/share"
             android:icon="@drawable/ic_baseline_share_24"
             android:title="@string/share" />
+        <item
+            android:id="@+id/settingsFragment"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:title="Settings" />
 
     </group>
 </menu>
