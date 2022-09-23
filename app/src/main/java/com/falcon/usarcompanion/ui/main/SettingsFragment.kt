@@ -9,6 +9,7 @@ import androidx.preference.EditTextPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.falcon.usarcompanion.MainActivity
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 
 
@@ -17,15 +18,21 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(com.falcon.usarcompanion.R.xml.root_preferences, rootKey)
         val preference = preferenceManager.findPreference<Preference>("libraries")
-        //mListPreference?.onPreferenceClickListener = this
         preference?.setOnPreferenceClickListener {
             startActivity(Intent(context, OssLicensesMenuActivity::class.java))
             true
         }
-        val editTextPreference = preferenceManager.findPreference<EditTextPreference>("year")
-        editTextPreference?.setOnBindEditTextListener { editText ->
-            editText.inputType = InputType.TYPE_CLASS_NUMBER
+        val preferenceBugReport = preferenceManager.findPreference<Preference>("bug")
+        preferenceBugReport?.setOnPreferenceClickListener {
+            (activity as MainActivity).composeEmail("Bug Report For USAR Companion")
+            true
         }
+        val preferenceContact = preferenceManager.findPreference<Preference>("contact")
+        preferenceContact?.setOnPreferenceClickListener {
+            (activity as MainActivity).composeEmail("Regarding App USAR Companion")
+            true
+        }
+        //mListPreference?.onPreferenceClickListener = this
     }
 
     override fun onCreateRecyclerView(

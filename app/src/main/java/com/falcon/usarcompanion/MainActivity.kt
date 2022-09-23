@@ -1,15 +1,16 @@
 package com.falcon.usarcompanion
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
 import com.falcon.usarcompanion.databinding.ActivityMainBinding
-import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -29,10 +30,8 @@ class MainActivity : AppCompatActivity()  {
         NavigationUI.setupWithNavController(binding.navView, navController)
 
         binding.fab.setOnClickListener { view ->
-            startActivity(Intent(this, OssLicensesMenuActivity::class.java))
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAnchorView(R.id.fab)
-                .setAction("Action", null).show()
+            composeEmail("Regarding App USAR Companion")
+            //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAnchorView(R.id.fab).setAction("Action", null).show()
         }
 
         binding.navView.setNavigationItemSelectedListener {
@@ -64,6 +63,20 @@ class MainActivity : AppCompatActivity()  {
         }
     }
 
+
+    fun composeEmail(subject: String) {
+        val a = arrayOf("usarcompanion@gmail.com")
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:") // only email apps should handle this
+            putExtra(Intent.EXTRA_EMAIL, a)
+            putExtra(Intent.EXTRA_SUBJECT, subject)
+        }
+        try {
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(this, "No Mail App Found", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
