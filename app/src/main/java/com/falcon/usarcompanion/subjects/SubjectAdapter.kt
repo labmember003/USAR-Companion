@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
+import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.falcon.usarcompanion.R
 import com.falcon.usarcompanion.network.Subject
 
@@ -17,13 +19,13 @@ private const val TYPE_HEADLINE = 0
 private const val TYPE_SUBJECT = 1
 
 class HeadlineItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    var tvTitle = itemView.findViewById<TextView>(R.id.tvTitle)
+    var tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
 }
 
 
 class SubjectItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    var subjectIcon = itemView.findViewById<ImageView>(R.id.subjectIcon)
-    var subjectName = itemView.findViewById<TextView>(R.id.subjectName)
+    var subjectIcon: ImageView = itemView.findViewById(R.id.subjectIcon)
+    var subjectName: TextView = itemView.findViewById(R.id.subjectName)
 }
 
 
@@ -79,6 +81,11 @@ class SubjectAdapter(
                 val imgUri = subject.iconUrl.toUri().buildUpon().scheme("https").build()
                 Glide.with(context)
                     .load(imgUri)
+                    //.fitCenter()
+                    .transition(withCrossFade(
+                        DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()
+                    ))
+                    .placeholder(R.drawable.circle)
                     .into(holder.subjectIcon)
             }
             else -> throw IllegalStateException("Unknown holder: $holder")
@@ -87,10 +94,10 @@ class SubjectAdapter(
 
 
     private fun getSubject(position: Int) : Subject {
-        if (isOddSemester(position)) {
-            return oddSemesterSubjects[position - 1]
+        return if (isOddSemester(position)) {
+            oddSemesterSubjects[position - 1]
         } else {
-            return evenSemesterSubjects[(position - oddSemesterSubjects.size) - 2]
+            evenSemesterSubjects[(position - oddSemesterSubjects.size) - 2]
         }
     }
 
