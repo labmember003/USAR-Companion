@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
@@ -35,7 +37,7 @@ class SubjectAdapter(
     private val evenSemesterSubjects: List<Subject>,
     private val onSubjectClick: (Subject) -> Unit
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+    private var lastPosition : Int = -1
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             TYPE_HEADLINE -> HeadlineItemViewHolder(LayoutInflater.from(context).inflate(R.layout.recyclerview_headline_item_layout, parent, false))
@@ -90,6 +92,7 @@ class SubjectAdapter(
             }
             else -> throw IllegalStateException("Unknown holder: $holder")
         }
+        setAnimation(holder.itemView.rootView, position)
     }
 
 
@@ -108,16 +111,12 @@ class SubjectAdapter(
     override fun getItemCount(): Int {
         return oddSemesterSubjects.size + evenSemesterSubjects.size + 2
     }
-    /*
-    interface sabKiMausi{
-        fun mausiReMausi(mau: Int): Void
-    }
-     */
-}
-/*
-implements sabKiMausi {
-    fun mausiReMausi(mau: Int): Int{
-        return mau+1
+    private fun setAnimation(viewToAnimate: View, position: Int) {
+        if (position > lastPosition) {
+            val animation: Animation =
+                AnimationUtils.loadAnimation(context, android.R.anim.fade_in)
+            viewToAnimate.startAnimation(animation)
+            lastPosition = position
+        }
     }
 }
- */
