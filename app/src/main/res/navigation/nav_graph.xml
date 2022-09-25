@@ -82,10 +82,15 @@
         tools:layout="@layout/fragment_resources" >
         <action
             android:id="@+id/action_resources_to_BranchesTabbedFragment"
-            app:destination="@id/BranchesTabbedFragment" />
+            app:destination="@id/BranchesTabbedFragment"
+            app:enterAnim="@anim/fade_in"
+            />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.falcon.usarcompanion.ui.main.SettingsFragment"
         android:label="Settings" />
 </navigation>
+<!--
+app:exitAnim="@anim/fade_out"
+-->

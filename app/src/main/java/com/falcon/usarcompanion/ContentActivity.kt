@@ -1,31 +1,23 @@
 package com.falcon.usarcompanion
 
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-import android.app.Activity
 import android.app.DownloadManager
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.BaseBundle
 import android.os.Bundle
 import android.os.Environment
-import android.os.Parcelable
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.navigation.NavDeepLinkBuilder
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.falcon.usarcompanion.databinding.ActivityContentBinding
-import com.falcon.usarcompanion.network.Section
 import com.falcon.usarcompanion.network.Subject
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.util.jar.Manifest
 
 
 class ContentActivity : AppCompatActivity() {

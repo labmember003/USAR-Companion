@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.falcon.usarcompanion.ContentActivity
 import com.falcon.usarcompanion.databinding.FragmentPlaylistsBinding
 import com.falcon.usarcompanion.network.Section
 import com.falcon.usarcompanion.ui.main.RcvContentAdapter

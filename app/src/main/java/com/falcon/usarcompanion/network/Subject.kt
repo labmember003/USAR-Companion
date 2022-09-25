@@ -1,6 +1,5 @@
 package com.falcon.usarcompanion.network
 
-import com.falcon.usarcompanion.network.Section
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import java.io.Serializable
