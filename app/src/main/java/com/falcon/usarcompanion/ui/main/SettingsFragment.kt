@@ -2,10 +2,8 @@ package com.falcon.usarcompanion.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.InputType
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.preference.EditTextPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -36,14 +34,14 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
     }
 
     override fun onCreateRecyclerView(
-        inflater: LayoutInflater?,
-        parent: ViewGroup?,
+        inflater: LayoutInflater,
+        parent: ViewGroup,
         savedInstanceState: Bundle?
-    ): RecyclerView? {
+    ): RecyclerView {
         return super.onCreateRecyclerView(inflater, parent, savedInstanceState)
     }
 
-    override fun onPreferenceClick(preference: Preference?): Boolean {
+    override fun onPreferenceClick(preference: Preference): Boolean {
         //Toast.makeText(context, "hemlo", Toast.LENGTH_SHORT).show()
         return true
     }
