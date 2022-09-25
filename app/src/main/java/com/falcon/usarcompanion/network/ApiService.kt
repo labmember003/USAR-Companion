@@ -11,7 +11,7 @@ import retrofit2.http.Url
 
 private const val BASE_URL = "https://github.com/labmember003/usar_data/raw/master/"
 
-private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+private val moshi = Moshi.Builder().build()
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
