@@ -90,6 +90,11 @@
         android:id="@+id/settingsFragment"
         android:name="com.falcon.usarcompanion.ui.main.SettingsFragment"
         android:label="Settings" />
+    <fragment
+        android:id="@+id/webviewFragment"
+        android:name="com.falcon.usarcompanion.ui.main.WebviewFragment"
+        android:label="Result"
+        tools:layout="@layout/fragment_webview" />
 </navigation>
 <!--
 app:exitAnim="@anim/fade_out"

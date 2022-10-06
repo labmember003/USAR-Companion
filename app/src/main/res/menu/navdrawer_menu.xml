@@ -16,6 +16,11 @@
             android:icon="@drawable/ic_baseline_map_24"
             android:title="Campus Map"
             />
+        <item
+            android:id="@+id/webviewFragment"
+            android:icon="@drawable/ic_baseline_map_24"
+            android:title="Result"
+            />
     </group>
 
     <group
