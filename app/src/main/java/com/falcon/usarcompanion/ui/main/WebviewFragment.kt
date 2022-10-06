@@ -21,6 +21,7 @@ class WebviewFragment : Fragment() {
     ): View {
         _binding = FragmentWebviewBinding.inflate(inflater, container, false)
         val url = "https://www.ipuranklist.com/student"
+        val url1 = "http://myproxy.com?t=https://www.ipuranklist.com/student"
         binding.resultWebView.settings.javaScriptEnabled = true
         binding.resultWebView.settings.userAgentString = "Android"
 //        binding.resultWebView.goBack()
@@ -28,7 +29,7 @@ class WebviewFragment : Fragment() {
         binding.resultWebView.webViewClient = object: WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-                binding.progressBar.visibility = View.GONE
+                binding.imagePendingAnimation.visibility = View.GONE
                 binding.resultWebView.visibility = View.VISIBLE
             }
         }
@@ -42,9 +43,9 @@ class WebviewFragment : Fragment() {
                     if (binding.resultWebView.canGoBack()) {
                         binding.resultWebView.goBack()
                     } else {
+                        isEnabled = false
                         requireActivity().onBackPressed()
                     }
-                    if (isEnabled) isEnabled = false
                 }
             }
             )
