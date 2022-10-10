@@ -17,8 +17,13 @@
             android:title="Campus Map"
             />
         <item
+            android:id="@+id/getDirections"
+            android:icon="@drawable/ic_baseline_directions_24"
+            android:title="@string/get_directions"
+            android:checkable="false" />
+        <item
             android:id="@+id/webviewFragment"
-            android:icon="@drawable/ic_baseline_map_24"
+            android:icon="@drawable/ic_baseline_result_right_alt_24"
             android:title="Result"
             />
     </group>
@@ -26,11 +31,6 @@
     <group
         android:id="@+id/group2"
         android:checkableBehavior="single">
-        <item
-            android:id="@+id/getDirections"
-            android:icon="@drawable/ic_baseline_directions_24"
-            android:title="@string/get_directions"
-            android:checkable="false" />
         <item
             android:id="@+id/share"
             android:icon="@drawable/ic_baseline_share_24"
