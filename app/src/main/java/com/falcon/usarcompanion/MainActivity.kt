@@ -4,12 +4,16 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
+import androidx.preference.PreferenceManager
 import com.falcon.usarcompanion.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -28,6 +32,8 @@ class MainActivity : AppCompatActivity()  {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout)
         NavigationUI.setupWithNavController(binding.navView, navController)
+
+
 
         binding.fab.setOnClickListener { view ->
             composeEmail("Regarding App USAR Companion")
@@ -61,6 +67,9 @@ class MainActivity : AppCompatActivity()  {
             }
             handled
         }
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val name = sharedPreferences.getString("name", "")
+        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.userName).text = "Hi, $name"
     }
 
 

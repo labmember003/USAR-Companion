@@ -1,12 +1,12 @@
 package com.falcon.usarcompanion.ui.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.widget.Toast
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.recyclerview.widget.RecyclerView
+import androidx.preference.PreferenceManager
 import com.falcon.usarcompanion.MainActivity
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 
@@ -30,15 +30,6 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
             (activity as MainActivity).composeEmail("Regarding App USAR Companion")
             true
         }
-        //mListPreference?.onPreferenceClickListener = this
-    }
-
-    override fun onCreateRecyclerView(
-        inflater: LayoutInflater,
-        parent: ViewGroup,
-        savedInstanceState: Bundle?
-    ): RecyclerView {
-        return super.onCreateRecyclerView(inflater, parent, savedInstanceState)
     }
 
     override fun onPreferenceClick(preference: Preference): Boolean {
@@ -46,3 +37,8 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
         return true
     }
 }
+/*
+val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+val name = sharedPreferences.getString("name", "")
+Toast.makeText(requireContext(), name, Toast.LENGTH_SHORT).show()
+ */
