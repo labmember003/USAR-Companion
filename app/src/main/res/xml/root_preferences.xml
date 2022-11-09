@@ -32,6 +32,16 @@
             app:title="Contact Us"
             app:useSimpleSummaryProvider="true"
             app:iconSpaceReserved="false"/>
+        <Preference
+            app:key="reviewCollege"
+            app:title="Review Your College And Earn !"
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://tinyurl.com/shikshausar"
+                />
+        </Preference>
     </PreferenceCategory>
     <PreferenceCategory app:title="About"
         app:iconSpaceReserved="false"

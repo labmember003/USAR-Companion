@@ -68,8 +68,13 @@ class MainActivity : AppCompatActivity()  {
             handled
         }
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val name = sharedPreferences.getString("name", "")
-        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.userName).text = "Hi, $name"
+        var name = sharedPreferences.getString("name", "")
+        name = if(name.isNullOrEmpty()) {
+            getString(R.string.app_name)
+        } else {
+            "Hi, $name"
+        }
+        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.userName).text = name
     }
 
 
