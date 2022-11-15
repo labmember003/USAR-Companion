@@ -3,10 +3,12 @@ package com.falcon.usarcompanion
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.DownloadManager
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.provider.DocumentsContract
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +20,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.falcon.usarcompanion.databinding.ActivityContentBinding
 import com.falcon.usarcompanion.network.Subject
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.io.File
 
 
 class ContentActivity : AppCompatActivity() {
@@ -126,9 +129,25 @@ private lateinit var binding: ActivityContentBinding
         request.allowScanningByMediaScanner()
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, titleAndFileName)
-        Toast.makeText(baseContext, "Download has begun, See Notifications", Toast.LENGTH_LONG).show()
-        val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        manager.enqueue(request)
+
+        // Check if file exists
+        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), titleAndFileName)
+
+        if (file.exists()) {
+            // Lauch INTENT of that file
+            //openFile2(titleAndFileName, fileURL, file)
+            //titleAndFileName
+            //Toast.makeText(this, titleAndFileName, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "exists", Toast.LENGTH_SHORT).show()
+            //Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+
+        } else {
+            // Download
+            Toast.makeText(this, "not exists", Toast.LENGTH_LONG).show()
+            Toast.makeText(baseContext, "Download has begun, See Notifications", Toast.LENGTH_LONG).show()
+            val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+            manager.enqueue(request)
+        }
     }
 
     private fun getMimeType(fileURL: String): String {
@@ -197,10 +216,43 @@ private lateinit var binding: ActivityContentBinding
             }
         }
     }
+    private fun openFile(titleAndFileName: String, fileURL: String, file: File) {
+        val file = File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).path + File.separator +
+                    titleAndFileName
+        )
+        Toast.makeText(this, file.absolutePath, Toast.LENGTH_SHORT).show()
+
+        val path = Uri.fromFile(file)
+        //val path = file.absolutePath
+        //val path = Environment.getExternalStorageDirectory().toString() + "/" + "Downloads" + "/" + titleAndFileName
+        //val uri = Uri.parse(file.absolutePath)
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.setDataAndType(path, "application/pdf")
+        //intent.setType("application/pdf")
+        this.startActivity(intent)
+
+    }
+    private fun openFile2(titleAndFileName: String, fileURL: String, file: File) {
+
+        Toast.makeText(this, file.absolutePath, Toast.LENGTH_SHORT).show()
+
+        val uri = Uri.fromFile(file)
+        //val path = file.absolutePath
+        //val path = Environment.getExternalStorageDirectory().toString() + "/" + "Downloads" + "/" + titleAndFileName
+        //val uri = Uri.parse(file.absolutePath)
+        val intent = Intent(Intent.ACTION_VIEW)
+
+        intent.setDataAndType(uri, "application/pdf")
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        //intent.setType("application/pdf")
+        this.startActivity(intent)
+
+    }
+    // Request code for selecting a PDF document.
 
 
 }
-
-
 
 
