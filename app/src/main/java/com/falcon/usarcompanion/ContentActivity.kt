@@ -2,18 +2,18 @@ package com.falcon.usarcompanion
 
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.DownloadManager
-import android.content.Context
-import android.content.Intent
+import android.content.*
 import android.content.pm.PackageManager
+import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.provider.DocumentsContract
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -21,6 +21,7 @@ import com.falcon.usarcompanion.databinding.ActivityContentBinding
 import com.falcon.usarcompanion.network.Subject
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.io.File
+import kotlin.math.absoluteValue
 
 
 class ContentActivity : AppCompatActivity() {
@@ -117,10 +118,12 @@ private lateinit var binding: ActivityContentBinding
 
 
     }
-
-    fun startDownloading(fileURL: String, titleAndFileName: String) {
-        val url : String = fileURL
-        val request = DownloadManager.Request(Uri.parse(url))
+/*
+    fun startDownloading2(fileURL: String, titleAndFileName: String) {
+        //val url : String = fileURL
+        val uri = Uri.parse(fileURL)
+        val request = DownloadManager.Request(Uri.parse(fileURL))
+        //registerReceiver(, )
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
         request.setTitle(titleAndFileName)
         request.setDescription("File is donwloading")
@@ -149,6 +152,8 @@ private lateinit var binding: ActivityContentBinding
             manager.enqueue(request)
         }
     }
+
+ */
 
     private fun getMimeType(fileURL: String): String {
         val type = getType(fileURL)
@@ -251,6 +256,115 @@ private lateinit var binding: ActivityContentBinding
 
     }
     // Request code for selecting a PDF document.
+    open fun startDownloading(fileURL: String?, titleAndFileName: String?) {
+        val activity = this
+        try {
+            if (fileURL != null && !fileURL.isEmpty()) {
+                val uri = Uri.parse(fileURL)
+                activity.registerReceiver(
+                    attachmentDownloadCompleteReceive, IntentFilter(
+                        DownloadManager.ACTION_DOWNLOAD_COMPLETE
+                    )
+                )
+                val request = DownloadManager.Request(Uri.parse(fileURL))
+                request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
+                request.setTitle(titleAndFileName)
+                request.setDescription("File is donwloading")
+                //request.setMimeType("application/pdf")
+                request.setMimeType(getMimeType(fileURL!!))
+                request.allowScanningByMediaScanner()
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, titleAndFileName)
+
+
+                val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), titleAndFileName)
+
+                if (file.exists()) {
+                    // Lauch INTENT of that file
+                    //openFile2(titleAndFileName, fileURL, file)
+                    //titleAndFileName
+                    //Toast.makeText(this, titleAndFileName, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "exists", Toast.LENGTH_SHORT).show()
+                    //Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                    //TODO(ELSE WAALA KAAM KRLO)
+
+                } else {
+
+
+                    // Download
+                    Toast.makeText(this, "not exists", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        baseContext,
+                        "Download has begun, See Notifications",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+                    manager.enqueue(request)
+                }
+
+            }
+        } catch (e: IllegalStateException) {
+            Toast.makeText(
+                activity,
+                "Please insert an SD card to download file",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+    var attachmentDownloadCompleteReceive: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val action = intent.action
+            if (DownloadManager.ACTION_DOWNLOAD_COMPLETE == action) {
+                val downloadId = intent.getLongExtra(
+                    DownloadManager.EXTRA_DOWNLOAD_ID, 0
+                )
+                openDownloadedAttachment(context, downloadId)
+            }
+        }
+    }
+    private fun openDownloadedAttachment(context: Context, downloadId: Long) {
+        val downloadManager = context.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+        val query = DownloadManager.Query()
+        query.setFilterById(downloadId)
+        val cursor: Cursor = downloadManager.query(query)
+        if (cursor.moveToFirst()) {
+            val downloadStatus: Int =
+                cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS).absoluteValue)
+            val downloadLocalUri: String =
+                cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI).absoluteValue)
+            val downloadMimeType: String =
+                cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_MEDIA_TYPE).absoluteValue)
+            if (downloadStatus == DownloadManager.STATUS_SUCCESSFUL && downloadLocalUri != null) {
+                openDownloadedAttachment(context, Uri.parse(downloadLocalUri), downloadMimeType)
+            }
+        }
+        cursor.close()
+    }
+
+    private fun openDownloadedAttachment(
+        context: Context,
+        attachmentUri: Uri,
+        attachmentMimeType: String
+    ) {
+        var attachmentUri: Uri? = attachmentUri
+        if (attachmentUri != null) {
+            // Get Content Uri.
+            if (ContentResolver.SCHEME_FILE == attachmentUri.scheme) {
+                // FileUri - Convert it to contentUri.
+                val file = File(attachmentUri.path)
+                attachmentUri =
+                    FileProvider.getUriForFile(this, "com.freshdesk.helpdesk.provider", file)
+            }
+            val openAttachmentIntent = Intent(Intent.ACTION_VIEW)
+            openAttachmentIntent.setDataAndType(attachmentUri, attachmentMimeType)
+            openAttachmentIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+            try {
+                context.startActivity(openAttachmentIntent)
+            } catch (e: ActivityNotFoundException) {
+
+            }
+        }
+    }
 
 
 }
