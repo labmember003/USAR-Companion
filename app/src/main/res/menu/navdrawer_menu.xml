@@ -39,6 +39,10 @@
             android:id="@+id/settingsFragment"
             android:icon="@drawable/ic_baseline_settings_24"
             android:title="Settings" />
+        <item
+            android:id="@+id/reviewAndEarn"
+            android:icon="@drawable/ic_baseline_attach_money_24"
+            android:title="Review College And  Earn" />
 
     </group>
 </menu>

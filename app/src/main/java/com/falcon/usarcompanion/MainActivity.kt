@@ -4,18 +4,15 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
 import androidx.preference.PreferenceManager
 import com.falcon.usarcompanion.databinding.ActivityMainBinding
-import com.google.android.material.snackbar.Snackbar
 
 
 class MainActivity : AppCompatActivity()  {
@@ -57,8 +54,16 @@ class MainActivity : AppCompatActivity()  {
                      type = "text/plain"
                  }
                  val shareIntent = Intent.createChooser(sendIntent, null)
-                 startActivity(shareIntent)
                  binding.drawerLayout.close()
+                 startActivity(shareIntent)
+                 return@setNavigationItemSelectedListener true
+             }
+            else if (it.itemId == R.id.reviewAndEarn) {
+                 val url = "https://tinyurl.com/shikshausar"
+                 val i = Intent(Intent.ACTION_VIEW)
+                 i.data = Uri.parse(url)
+                 binding.drawerLayout.close()
+                 startActivity(i)
                  return@setNavigationItemSelectedListener true
              }
             val handled = NavigationUI.onNavDestinationSelected(it, navController)
