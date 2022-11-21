@@ -6,6 +6,7 @@ import android.content.*
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -256,11 +257,10 @@ private lateinit var binding: ActivityContentBinding
 
     }
     // Request code for selecting a PDF document.
-    open fun startDownloading(fileURL: String?, titleAndFileName: String?) {
+    fun startDownloading(fileURL: String, titleAndFileName: String) {
         val activity = this
         try {
-            if (fileURL != null && !fileURL.isEmpty()) {
-                val uri = Uri.parse(fileURL)
+            if (fileURL.isNotEmpty()) {
                 activity.registerReceiver(
                     attachmentDownloadCompleteReceive, IntentFilter(
                         DownloadManager.ACTION_DOWNLOAD_COMPLETE
@@ -271,7 +271,7 @@ private lateinit var binding: ActivityContentBinding
                 request.setTitle(titleAndFileName)
                 request.setDescription("File is donwloading")
                 //request.setMimeType("application/pdf")
-                request.setMimeType(getMimeType(fileURL!!))
+                request.setMimeType(getMimeType(fileURL))
                 request.allowScanningByMediaScanner()
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
                 request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, titleAndFileName)
@@ -280,19 +280,21 @@ private lateinit var binding: ActivityContentBinding
                 val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), titleAndFileName)
 
                 if (file.exists()) {
-                    // Lauch INTENT of that file
-                    //openFile2(titleAndFileName, fileURL, file)
-                    //titleAndFileName
-                    //Toast.makeText(this, titleAndFileName, Toast.LENGTH_SHORT).show()
-                    Toast.makeText(this, "exists", Toast.LENGTH_SHORT).show()
-                    //Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                    //TODO(ELSE WAALA KAAM KRLO)
+//                    Toast.makeText(this, "exists", Toast.LENGTH_SHORT).show()
+                    val myIntent = Intent(Intent.ACTION_VIEW)
+                    val fileProviderUri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", file)
+                    myIntent.data = fileProviderUri
+                    myIntent.setDataAndType(fileProviderUri, getMimeType(fileURL))
+                    myIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    val j = Intent.createChooser(myIntent, "Choose an application to open with:")
+                    startActivity(j)
 
                 } else {
 
 
                     // Download
-                    Toast.makeText(this, "not exists", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(this, "not exists", Toast.LENGTH_LONG).show()
                     Toast.makeText(
                         baseContext,
                         "Download has begun, See Notifications",
@@ -353,7 +355,7 @@ private lateinit var binding: ActivityContentBinding
                 // FileUri - Convert it to contentUri.
                 val file = File(attachmentUri.path)
                 attachmentUri =
-                    FileProvider.getUriForFile(this, "com.freshdesk.helpdesk.provider", file)
+                    FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID +".provider", file)
             }
             val openAttachmentIntent = Intent(Intent.ACTION_VIEW)
             openAttachmentIntent.setDataAndType(attachmentUri, attachmentMimeType)

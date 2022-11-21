@@ -75,6 +75,7 @@ private var _binding: FragmentBooksBinding? = null
         super.onDestroyView()
         _binding = null
     }
+
     fun onContentClick(fileURL: String, titleAndFileName: String) {
         (activity as ContentActivity?)!!.startDownloading(fileURL, titleAndFileName)
     }

@@ -33,11 +33,11 @@ class BranchesTabbedFragment : Fragment() {
         TabLayoutMediator(binding.tabs, viewPager) { tab, position ->
             tab.text = context?.getString(TAB_TITLES[position])
         }.attach()
-        getActionBar()!!.title = "Year " + currentYear.toString()
+        getActionBar()?.title = "Year " + currentYear.toString()
         return binding.root
     }
 
     private fun getActionBar(): androidx.appcompat.app.ActionBar? {
-        return (activity as MainActivity?)!!.supportActionBar
+        return (activity as? MainActivity)?.supportActionBar
     }
 }
