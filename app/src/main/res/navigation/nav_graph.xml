@@ -95,6 +95,11 @@
         android:name="com.falcon.usarcompanion.ui.main.WebviewFragment"
         android:label="Result"
         tools:layout="@layout/fragment_webview" />
+    <fragment
+        android:id="@+id/PrintFragment"
+        android:name="com.falcon.usarcompanion.ui.main.PrintFragment"
+        android:label="Prints"
+        tools:layout="@layout/fragment_print" />
 </navigation>
 <!--
 app:exitAnim="@anim/fade_out"

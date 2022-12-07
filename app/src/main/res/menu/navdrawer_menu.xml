@@ -26,6 +26,11 @@
             android:icon="@drawable/ic_baseline_result_right_alt_24"
             android:title="Result"
             />
+        <item
+            android:id="@+id/PrintFragment"
+            android:icon="@drawable/ic_baseline_print_24"
+            android:title="Notes Printing"
+            />
     </group>
 
     <group
