@@ -105,6 +105,11 @@
         android:name="com.falcon.usarcompanion.ui.main.MerchandiseFragment"
         android:label="Merchandise"
         tools:layout="@layout/fragment_merchandise" />
+    <fragment
+        android:id="@+id/SocietyFragment"
+        android:name="com.falcon.usarcompanion.ui.main.SocietyFragment"
+        android:label="Societies"
+        tools:layout="@layout/fragment_society" />
 </navigation>
 <!--
 app:exitAnim="@anim/fade_out"

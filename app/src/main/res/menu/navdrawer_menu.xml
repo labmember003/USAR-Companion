@@ -27,6 +27,11 @@
             android:title="Result"
             />
         <item
+            android:id="@+id/SocietyFragment"
+            android:icon="@drawable/ic_baseline_people_24"
+            android:title="Societies"
+            />
+        <item
             android:id="@+id/PrintFragment"
             android:icon="@drawable/ic_baseline_print_24"
             android:title="Get Printed Notes"
