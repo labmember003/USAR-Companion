@@ -100,6 +100,11 @@
         android:name="com.falcon.usarcompanion.ui.main.PrintFragment"
         android:label="Prints"
         tools:layout="@layout/fragment_print" />
+    <fragment
+        android:id="@+id/MerchandiseFragment"
+        android:name="com.falcon.usarcompanion.ui.main.MerchandiseFragment"
+        android:label="Merchandise"
+        tools:layout="@layout/fragment_merchandise" />
 </navigation>
 <!--
 app:exitAnim="@anim/fade_out"
