@@ -1,19 +1,20 @@
 package com.falcon.usarcompanion.ui.main
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
-import android.webkit.WebViewClient
-import androidx.activity.OnBackPressedCallback
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.falcon.usarcompanion.MyAdapter
 import com.falcon.usarcompanion.databinding.FragmentMerchandiseBinding
+import com.falcon.usarcompanion.network.Merge
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class MerchandiseFragment : Fragment() {
-
+    private lateinit var database: DatabaseReference
     private var _binding: FragmentMerchandiseBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
@@ -21,35 +22,22 @@ class MerchandiseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMerchandiseBinding.inflate(inflater, container, false)
-        val url = "https://www.ipuranklist.com/student"
-        val url1 = "http://myproxy.com?t=https://www.ipuranklist.com/student"
-        binding.resultWebView.settings.javaScriptEnabled = true
-        binding.resultWebView.settings.userAgentString = "Android"
-//        binding.resultWebView.goBack()
+        database = FirebaseDatabase.getInstance().getReference("categories")
+        //var data = database.child("categories").child("0").child("merchList")
+        //Toast.makeText(context, data.toString(), Toast.LENGTH_LONG).show()
+        //binding.test.text = data.toString()
 
-        binding.resultWebView.webViewClient = object: WebViewClient() {
-            override fun onPageFinished(view: WebView?, url: String?) {
-                super.onPageFinished(view, url)
-                binding.imagePendingAnimation.visibility = View.GONE
-                binding.resultWebView.visibility = View.VISIBLE
-            }
-        }
-        binding.resultWebView.loadUrl(url)
+        //println(data.toString())
+//        val a = data.database.
+//        println(a)
 
-        requireActivity()
-            .onBackPressedDispatcher
-            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    Log.d(TAG, "Fragment back pressed invoked")
-                    if (binding.resultWebView.canGoBack()) {
-                        binding.resultWebView.goBack()
-                    } else {
-                        isEnabled = false
-                        requireActivity().onBackPressed()
-                    }
-                }
-            }
-            )
+        val merge1 = Merge("google.com", "Aot themed", "$200")
+        val merge2 = Merge("google.com", "Aot themed", "$200")
+        val merge3 = Merge("google.com", "Aot themed", "$200")
+        val merge4 = Merge("google.com", "Aot themed", "$200")
+        val merges = listOf(merge1, merge2, merge3, merge4)
+        binding.merchandiseList.adapter = MyAdapter(requireContext(), merges)
+        binding.merchandiseList.layoutManager = LinearLayoutManager(context)
         return binding.root
     }
 }
