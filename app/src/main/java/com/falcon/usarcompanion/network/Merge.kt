@@ -5,7 +5,7 @@ import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
 data class Merge (
-    @Json(name = "source_url") val merchImage: String,
-    @Json(name = "merchName") val merchName: String,
-    @Json(name = "merchPrice") val merchPrice: String
+    @Json(name = "source_url") val merchImage: String = "",
+    @Json(name = "merchName") val merchName: String = "",
+    @Json(name = "merchPrice") val merchPrice: String = ""
 ): Serializable

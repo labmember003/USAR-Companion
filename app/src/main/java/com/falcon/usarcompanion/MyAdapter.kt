@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.falcon.usarcompanion.network.Merge
 
-class MyAdapter(val context: Context, private val merges: List<Merge>): Adapter<MyAdapter.MyViewHolder>() {
+class MyAdapter(private val merges: List<Merge>): Adapter<MyAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.item, parent, false)

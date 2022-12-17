@@ -8,6 +8,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.falcon.usarcompanion.MainActivity
+import com.falcon.usarcompanion.R
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 
 
@@ -22,12 +23,12 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceClic
         }
         val preferenceBugReport = preferenceManager.findPreference<Preference>("bug")
         preferenceBugReport?.setOnPreferenceClickListener {
-            (activity as MainActivity).composeEmail("Bug Report For USAR Companion")
+            (activity as MainActivity).composeEmail("Bug Report For " + getString(R.string.app_name))
             true
         }
         val preferenceContact = preferenceManager.findPreference<Preference>("contact")
         preferenceContact?.setOnPreferenceClickListener {
-            (activity as MainActivity).composeEmail("Regarding App USAR Companion")
+            (activity as MainActivity).composeEmail("Regarding App " + getString(R.string.app_name))
             true
         }
     }

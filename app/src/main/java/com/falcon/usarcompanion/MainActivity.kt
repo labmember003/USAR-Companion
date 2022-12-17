@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity()  {
 
 
         binding.fab.setOnClickListener { view ->
-            composeEmail("Regarding App USAR Companion")
+            composeEmail("Regarding App " + getString(R.string.app_name))
             //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAnchorView(R.id.fab).setAction("Action", null).show()
         }
 
