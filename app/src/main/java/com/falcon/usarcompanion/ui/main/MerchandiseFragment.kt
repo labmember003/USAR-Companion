@@ -79,7 +79,7 @@ class MerchandiseFragment : Fragment() {
                                 merchandiseList.add(it)
                         }
                     }
-                    merchRecyclerView.adapter = MyAdapter(merchandiseList)
+                    merchRecyclerView.adapter = MyAdapter(requireContext(), merchandiseList)
                     binding.imagePendingAnimation.visibility = View.INVISIBLE
                 }
             }
