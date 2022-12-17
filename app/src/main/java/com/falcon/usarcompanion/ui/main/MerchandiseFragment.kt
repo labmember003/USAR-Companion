@@ -1,12 +1,18 @@
 package com.falcon.usarcompanion.ui.main
 
+import android.app.Application
 import android.content.ContentValues.TAG
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +29,7 @@ class MerchandiseFragment : Fragment() {
     private lateinit var  merchRecyclerView: RecyclerView
     private lateinit var  merchandiseList: ArrayList<Merge>
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,8 +40,32 @@ class MerchandiseFragment : Fragment() {
         merchRecyclerView.setHasFixedSize(true)
         merchandiseList = arrayListOf<Merge>()
         getUserData()
-
+        context?.let {
+            if (!isOnline(it)) {
+                Toast.makeText(it, "NO INTERNET CONNECTION", Toast.LENGTH_LONG).show()
+            }
+        }
         return binding.root
+    }
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun isOnline(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val capabilities =
+            connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+        if (capabilities != null) {
+            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
+                return true
+            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
+                return true
+            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
+                return true
+            }
+        }
+        return false
     }
 
     private fun getUserData() {
