@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.falcon.usarcompanion.network.Merge
 
 class MyAdapter(val context: Context,private val merges: List<Merge>): Adapter<MyAdapter.MyViewHolder>() {
@@ -21,10 +23,14 @@ class MyAdapter(val context: Context,private val merges: List<Merge>): Adapter<M
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.merchName.text = merges[position].merchName
         holder.merchPrice.text = merges[position].merchPrice
-        val myurl = merges[position].merchImage
-        val myUrl2 = "https://raw.githubusercontent.com/labmember003/usar_data/master/YEAR_1/icons/EvsIcon.png"
         Glide.with(context)
-            .load(myUrl2)
+            .load(merges[position].source_url)
+            .transition(
+                DrawableTransitionOptions.withCrossFade(
+                    DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()
+                )
+            )
+            .placeholder(R.drawable.circle)
             .into(holder.mergeImage)
     }
 
