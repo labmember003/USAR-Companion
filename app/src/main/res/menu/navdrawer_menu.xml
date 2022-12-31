@@ -26,6 +26,7 @@
             android:icon="@drawable/ic_baseline_result_right_alt_24"
             android:title="Result"
             />
+        <!--
         <item
             android:id="@+id/SocietyFragment"
             android:icon="@drawable/ic_baseline_people_24"
@@ -36,10 +37,11 @@
             android:icon="@drawable/ic_baseline_print_24"
             android:title="Get Printed Notes"
             />
+            -->
         <item
             android:id="@+id/MerchandiseFragment"
             android:icon="@drawable/ic_baseline_accessibility_24"
-            android:title="Merchandise"
+            android:title="USAR Merchandise"
             />
     </group>
 
