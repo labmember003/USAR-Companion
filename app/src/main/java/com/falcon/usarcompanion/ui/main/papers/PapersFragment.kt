@@ -1,10 +1,15 @@
 package com.falcon.usarcompanion.ui.dashboard
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +17,7 @@ import com.falcon.usarcompanion.ContentActivity
 import com.falcon.usarcompanion.databinding.FragmentPapersBinding
 import com.falcon.usarcompanion.network.Section
 import com.falcon.usarcompanion.ui.main.RcvContentAdapter
+import java.io.File
 
 class PapersFragment : Fragment() {
 
@@ -65,7 +71,7 @@ private var _binding: FragmentPapersBinding? = null
             binding.sale = true
         }
 
-        val adapter = RcvContentAdapter(requireContext(), papers?.contents!!, papers.title, ::onContentClick)
+        val adapter = RcvContentAdapter(requireContext(), papers?.contents!!, papers.title, ::onContentClick, ::shareFile)
         binding.rvContentsPapers.adapter = adapter
         binding.rvContentsPapers.layoutManager = LinearLayoutManager(requireContext())
 
@@ -76,7 +82,24 @@ private var _binding: FragmentPapersBinding? = null
         super.onDestroyView()
         _binding = null
     }
-    fun onContentClick(fileURL: String, titleAndFileName: String) {
+    private fun shareFile(fileName: String) {
+        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName)
+        if (file.exists()) {
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "*/*"
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            val photoURI = FileProvider.getUriForFile(
+                requireContext(),
+                requireContext().applicationContext.packageName + ".provider",
+                file
+            )
+            intent.putExtra(Intent.EXTRA_STREAM, photoURI)
+            startActivity(Intent.createChooser(intent, "Share File"))
+        } else {
+            Toast.makeText(requireContext(), "First Download the file", Toast.LENGTH_SHORT).show()
+        }
+    }
+    private fun onContentClick(fileURL: String, titleAndFileName: String) {
         (activity as ContentActivity?)!!.startDownloading(fileURL, titleAndFileName)
     }
 }
