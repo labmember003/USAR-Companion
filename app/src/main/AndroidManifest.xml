@@ -21,6 +21,10 @@
         android:theme="@style/Theme.USARCompanion"
         tools:targetApi="31"
         android:name=".App">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4084185609621967~7480292046"/>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

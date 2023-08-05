@@ -9,7 +9,6 @@ plugins {
 
 android {
     compileSdk 33
-
     defaultConfig {
         applicationId "com.falcon.usarcompanion"
         minSdk 21
@@ -18,6 +17,13 @@ android {
         versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    configurations.all {
+        resolutionStrategy {
+//            force 'com.google.android.gms:play-services-measurement-base:20.1.0'
+//            force 'com.google.android.gms:play-services-measurement-impl:20.1.0'
+            // Add other dependencies that are causing conflicts
+        }
     }
     buildTypes {
         release {
@@ -42,6 +48,24 @@ android {
         dataBinding true
     }
     buildToolsVersion '32.0.0'
+    packagingOptions {
+//        exclude 'com/google/android/gms/internal/measurement/zzhx.class'
+//        exclude 'com/google/android/gms/internal/measurement/zzmz.class'
+//        exclude 'com/google/android/gms/internal/measurement/zzna.class'
+//        exclude 'com/google/android/gms/internal/measurement/zznb.class'
+//        exclude 'com/google/android/gms/internal/measurement/zznc.class'
+//        exclude 'com/google/android/gms/internal/measurement/zznd.class'
+//        exclude 'com/google/android/gms/measurement/internal/zzga.class'
+//        exclude 'com/google/android/gms/measurement/internal/zzhe.class'
+//        exclude 'com/google/android/gms/measurement/internal/zzhf.class'
+//        exclude 'com/google/android/gms/measurement/internal/zzhg.class'
+//        exclude 'com/google/android/gms/measurement/internal/zzhh.class'
+//        exclude 'com/google/android/gms/measurement/internal/zzhi.class'
+//        exclude 'com/google/android/gms/measurement/internal/zzhj.class'
+//        exclude 'com/google/android/gms/measurement/internal/zzio.class'
+//        exclude 'com/google/android/gms/measurement/internal/zzit.class'
+//        exclude 'com/google/android/gms/measurement/internal/zzag.class'
+    }
 }
 
 dependencies {
@@ -85,5 +109,19 @@ dependencies {
     implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
 
     implementation platform('com.google.firebase:firebase-bom:28.0.1')
-    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-analytics:21.3.0'
+
+
+
+//    implementation 'com.google.android.gms:play-services-ads:22.2.0'
+//    implementation ('com.google.android.gms:play-services-ads:22.2.0') {
+//        exclude module: 'play-services-measurement-base'
+//        exclude module: 'play-services-measurement-impl'
+//    }
+    implementation ('com.google.android.gms:play-services-ads:22.2.0') {
+//        exclude group: 'com.google.android.gms', module: 'play-services-measurement-base'
+//        exclude group: 'com.google.android.gms', module: 'play-services-measurement-impl'
+    }
+//    implementation platform('com.google.android.gms:play-services-bom:17.6.0')
+
 }

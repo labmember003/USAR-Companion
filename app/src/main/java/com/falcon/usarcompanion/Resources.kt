@@ -11,6 +11,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import com.falcon.usarcompanion.databinding.FragmentFirstBinding
 import com.falcon.usarcompanion.databinding.FragmentResourcesBinding
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.coroutines.NonDisposableHandle.parent
 
 class Resources : Fragment() {
@@ -26,6 +30,12 @@ class Resources : Fragment() {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_resources, container, false)
         _binding = FragmentResourcesBinding.inflate(inflater, container, false)
+
+// TODO: Add adView to your view hierarchy.
+
+
+
+
         var currentYear = 0
         listOf(binding.year1, binding.year2, binding.year3, binding.year4).forEach{
             currentYear++
@@ -43,6 +53,9 @@ class Resources : Fragment() {
         //(activity as MainActivity).actionBar?.setTitle("mausi")
         //getActionBar()!!.setTitle("USAR Companion")
 
+        val mAdView = binding.adView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
         /*
         // making resource fragment as start destination
         1. NavGraph mei start destination ko first fragment se resource fragment kr diya
