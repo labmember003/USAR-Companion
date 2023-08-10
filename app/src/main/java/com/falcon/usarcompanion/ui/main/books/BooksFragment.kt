@@ -17,6 +17,7 @@ import com.falcon.usarcompanion.ContentActivity
 import com.falcon.usarcompanion.databinding.FragmentBooksBinding
 import com.falcon.usarcompanion.network.Section
 import com.falcon.usarcompanion.ui.main.RcvContentAdapter
+import com.google.android.gms.ads.AdRequest
 import java.io.File
 
 class BooksFragment : Fragment() {
@@ -75,6 +76,10 @@ private var _binding: FragmentBooksBinding? = null
         binding.rvContentsBooks.adapter = adapter
         binding.rvContentsBooks.layoutManager = LinearLayoutManager(requireContext())
         //
+
+        val mAdView = binding.adView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
     }
     override fun onDestroyView() {
