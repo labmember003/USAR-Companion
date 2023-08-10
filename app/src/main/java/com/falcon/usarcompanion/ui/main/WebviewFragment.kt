@@ -11,6 +11,7 @@ import android.webkit.WebViewClient
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.falcon.usarcompanion.databinding.FragmentWebviewBinding
+import com.google.android.gms.ads.AdRequest
 
 class WebviewFragment : Fragment() {
     private var _binding: FragmentWebviewBinding? = null
@@ -26,6 +27,9 @@ class WebviewFragment : Fragment() {
         binding.resultWebView.settings.userAgentString = "Android"
 //        binding.resultWebView.goBack()
 
+        val mAdView = binding.adView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
         binding.resultWebView.webViewClient = object: WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)

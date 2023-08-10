@@ -20,6 +20,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.falcon.usarcompanion.databinding.ActivityContentBinding
 import com.falcon.usarcompanion.network.Subject
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.io.File
 import kotlin.math.absoluteValue
@@ -34,7 +36,7 @@ private lateinit var binding: ActivityContentBinding
         //
         //ActivityCompat.requestPermissions(this,,1)
         // Function to check and request permission.
-
+        MobileAds.initialize(this) {}
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED) {
             //Toast.makeText(this, "bro Permission tho de", Toast.LENGTH_SHORT).show()
@@ -45,7 +47,6 @@ private lateinit var binding: ActivityContentBinding
             //Toast.makeText(this, "Permission mil gyi ", Toast.LENGTH_SHORT).show()
             //startDownloading()
         }
-
         // This function is called when the user accepts or decline the permission.
 // Request Code is used to check which permission called this function.
 // This request code is provided when the user is prompt for permission.
