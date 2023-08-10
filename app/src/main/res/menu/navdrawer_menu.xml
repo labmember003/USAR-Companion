@@ -38,11 +38,11 @@
             android:title="Get Printed Notes"
             />
             -->
-        <item
-            android:id="@+id/MerchandiseFragment"
-            android:icon="@drawable/ic_baseline_accessibility_24"
-            android:title="USAR Merchandise"
-            />
+<!--        <item-->
+<!--            android:id="@+id/MerchandiseFragment"-->
+<!--            android:icon="@drawable/ic_baseline_accessibility_24"-->
+<!--            android:title="USAR Merchandise"-->
+<!--            />-->
     </group>
 
     <group
