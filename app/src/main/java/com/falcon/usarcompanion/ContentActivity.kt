@@ -64,21 +64,11 @@ private lateinit var binding: ActivityContentBinding
 
         val bundleNotes = Bundle(); val bundlePaper = Bundle()
         val bundleBooks = Bundle(); val bundlePlaylist = Bundle(); val bundleSyallabus = Bundle()
-        //bundleNotes.putSerializable("Notes", result.sections[0]) // 0 for notes and files 1 for papers and 2 for books
         val bundleKeyList = listOf<String>("Notes", "papers", "books", "Playlists", "Syllabus")
         val bundleList = listOf<Bundle>(bundleNotes, bundlePaper, bundleBooks, bundlePlaylist, bundleSyallabus)
         for (i in 0..4) {
             bundleList[i].putSerializable(bundleKeyList[i], result.sections[i])
-            // if array pass krni ho tho :-
-            //bundleList[i].putSerializable(bundleKeyList[i],ArrayList(result.sections))
-            //bundleList[i].putSerializable(bundleKeyList[i],result.sections.toTypedArray())
-            // this works because ArrayList aur TypedArray internally implements serializable
         }
-        //val b = Bundle()
-        //b.putSerializable("ma", result.sections[0].contents[0])
-        //b.putParcelableArrayList("Product", result.sections[0])
-
-        //
 
         val navController = findNavController(R.id.nav_host_fragment_contentActivity).also {
             it.setGraph(R.navigation.mobile_navigation, bundleNotes)
@@ -117,45 +107,7 @@ private lateinit var binding: ActivityContentBinding
             }
             true
         }
-
-
     }
-/*
-    fun startDownloading2(fileURL: String, titleAndFileName: String) {
-        //val url : String = fileURL
-        val uri = Uri.parse(fileURL)
-        val request = DownloadManager.Request(Uri.parse(fileURL))
-        //registerReceiver(, )
-        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
-        request.setTitle(titleAndFileName)
-        request.setDescription("File is donwloading")
-        //request.setMimeType("application/pdf")
-        request.setMimeType(getMimeType(fileURL))
-        request.allowScanningByMediaScanner()
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, titleAndFileName)
-
-        // Check if file exists
-        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), titleAndFileName)
-
-        if (file.exists()) {
-            // Lauch INTENT of that file
-            //openFile2(titleAndFileName, fileURL, file)
-            //titleAndFileName
-            //Toast.makeText(this, titleAndFileName, Toast.LENGTH_SHORT).show()
-            Toast.makeText(this, "exists", Toast.LENGTH_SHORT).show()
-            //Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-
-        } else {
-            // Download
-            Toast.makeText(this, "not exists", Toast.LENGTH_LONG).show()
-            Toast.makeText(baseContext, "Download has begun, See Notifications", Toast.LENGTH_LONG).show()
-            val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-            manager.enqueue(request)
-        }
-    }
-
- */
 
     private fun getMimeType(fileURL: String): String {
         val type = getType(fileURL)
@@ -191,21 +143,6 @@ private lateinit var binding: ActivityContentBinding
         return ""
     }
 
-    /*
-    fun startDownloading(fileURL: String, titleAndFileName: String) {
-        val url : String = "https://github.com/labmember003/usar_data/raw/master/YEAR_1/Sem1/CommunicationSkills/Exam/MinorExam.pdf"
-        val request = DownloadManager.Request(Uri.parse(url))
-        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
-        request.setTitle("gggg")
-        request.setDescription("File is donwloading")
-        request.allowScanningByMediaScanner()
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "mausi.pdf")
-
-        val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        manager.enqueue(request)
-    }
-     */
 
     override fun onBackPressed() {
         finish()
@@ -223,46 +160,12 @@ private lateinit var binding: ActivityContentBinding
             }
         }
     }
-    private fun openFile(titleAndFileName: String, fileURL: String, file: File) {
-        val file = File(
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).path + File.separator +
-                    titleAndFileName
-        )
-        Toast.makeText(this, file.absolutePath, Toast.LENGTH_SHORT).show()
-
-        val path = Uri.fromFile(file)
-        //val path = file.absolutePath
-        //val path = Environment.getExternalStorageDirectory().toString() + "/" + "Downloads" + "/" + titleAndFileName
-        //val uri = Uri.parse(file.absolutePath)
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        intent.setDataAndType(path, "application/pdf")
-        //intent.setType("application/pdf")
-        this.startActivity(intent)
-
-    }
-    private fun openFile2(titleAndFileName: String, fileURL: String, file: File) {
-
-        Toast.makeText(this, file.absolutePath, Toast.LENGTH_SHORT).show()
-
-        val uri = Uri.fromFile(file)
-        //val path = file.absolutePath
-        //val path = Environment.getExternalStorageDirectory().toString() + "/" + "Downloads" + "/" + titleAndFileName
-        //val uri = Uri.parse(file.absolutePath)
-        val intent = Intent(Intent.ACTION_VIEW)
-
-        intent.setDataAndType(uri, "application/pdf")
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        //intent.setType("application/pdf")
-        this.startActivity(intent)
-
-    }
     // Request code for selecting a PDF document.
     fun startDownloading(fileURL: String, titleAndFileName: String) {
         val activity = this
         try {
             if (fileURL.isNotEmpty()) {
-                activity.registerReceiver( //TODO 24
+                activity.registerReceiver(
                     attachmentDownloadCompleteReceive,
                     IntentFilter(
                         DownloadManager.ACTION_DOWNLOAD_COMPLETE
@@ -273,40 +176,17 @@ private lateinit var binding: ActivityContentBinding
                 request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
                 request.setTitle(titleAndFileName)
                 request.setDescription("File is donwloading")
-                //request.setMimeType("application/pdf")
                 request.setMimeType(getMimeType(fileURL))
                 request.allowScanningByMediaScanner()
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
                 request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, titleAndFileName)
-
-
-                val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), titleAndFileName)
-
-                if (file.exists()) {
-//                    Toast.makeText(this, "exists", Toast.LENGTH_SHORT).show()
-                    val myIntent = Intent(Intent.ACTION_VIEW)
-                    val fileProviderUri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", file)
-                    myIntent.data = fileProviderUri
-                    myIntent.setDataAndType(fileProviderUri, getMimeType(fileURL))
-                    myIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                    myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    val j = Intent.createChooser(myIntent, "Choose an application to open with:")
-                    startActivity(j)
-
-                } else {
-
-
-                    // Download
-//                    Toast.makeText(this, "not exists", Toast.LENGTH_LONG).show()
-                    Toast.makeText(
-                        baseContext,
-                        "Download has begun, See Notifications",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-                    manager.enqueue(request)
-                }
-
+                Toast.makeText(
+                    baseContext,
+                    "Download has begun, See Notifications",
+                    Toast.LENGTH_LONG
+                ).show()
+                val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+                manager.enqueue(request)
             }
         } catch (e: IllegalStateException) {
             Toast.makeText(
@@ -316,7 +196,28 @@ private lateinit var binding: ActivityContentBinding
             ).show()
         }
     }
-    var attachmentDownloadCompleteReceive: BroadcastReceiver = object : BroadcastReceiver() {
+
+    fun openFile(file: File, fileURL: String) {
+        if (file.exists()) {
+            val myIntent = Intent(Intent.ACTION_VIEW)
+            val fileProviderUri =
+                FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", file)
+            myIntent.data = fileProviderUri
+            myIntent.setDataAndType(fileProviderUri, getMimeType(fileURL))
+            myIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            val j = Intent.createChooser(myIntent, "Choose an application to open with:")
+            startActivity(j)
+        } else {
+            Toast.makeText(
+                baseContext,
+                "File not found",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
+    private var attachmentDownloadCompleteReceive: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action
             if (DownloadManager.ACTION_DOWNLOAD_COMPLETE == action) {

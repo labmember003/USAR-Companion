@@ -75,11 +75,6 @@ class SyllabusFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-    /*
-        val callback2 = requireActivity().onBackPressedDispatcher.addCallback(this) {
-            findNavController().navigate(R.id.action_homeFragment_to_mainActivity3)
-        }
-     */
     private fun shareFile(fileName: String) {
         val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName)
         if (file.exists()) {
@@ -98,8 +93,11 @@ class SyllabusFragment : Fragment() {
         }
     }
     private fun onContentClick(fileURL: String, titleAndFileName: String) {
-        (activity as ContentActivity?)!!.startDownloading(fileURL, titleAndFileName)
+        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), titleAndFileName)
+        if (!file.exists()) {
+            (activity as ContentActivity?)!!.startDownloading(fileURL, titleAndFileName)
+        } else {
+            (activity as ContentActivity?)!!.openFile(file, fileURL)
+        }
     }
-    //requireActivity()
-
 }

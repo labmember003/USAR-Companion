@@ -99,8 +99,12 @@ private var _binding: FragmentNotesBinding? = null
         }
     }
     private fun onContentClick(fileURL: String, titleAndFileName: String) {
-        (activity as ContentActivity?)!!.startDownloading(fileURL, titleAndFileName)
+        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), titleAndFileName)
+        if (!file.exists()) {
+            (activity as ContentActivity?)!!.startDownloading(fileURL, titleAndFileName)
+        } else {
+            (activity as ContentActivity?)!!.openFile(file, fileURL)
+        }
     }
-    //requireActivity()
 
 }
