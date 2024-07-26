@@ -1,7 +1,6 @@
-package com.falcon.usarcompanion.ui.dashboard
+package com.falcon.usarcompanion.ui.main.papers
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.falcon.usarcompanion.ContentActivity
 import com.falcon.usarcompanion.databinding.FragmentPapersBinding
 import com.falcon.usarcompanion.network.Section
+import com.falcon.usarcompanion.ui.dashboard.PapersViewModel
 import com.falcon.usarcompanion.ui.main.RcvContentAdapter
 import com.google.android.gms.ads.AdRequest
 import java.io.File

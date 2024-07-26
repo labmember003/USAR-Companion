@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/navigation2"
-        android:name="com.falcon.usarcompanion.ui.dashboard.PapersFragment"
+        android:name="com.falcon.usarcompanion.ui.main.papers.PapersFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_papers" >
         <argument android:name="papers"

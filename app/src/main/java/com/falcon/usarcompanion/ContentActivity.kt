@@ -262,10 +262,12 @@ private lateinit var binding: ActivityContentBinding
         val activity = this
         try {
             if (fileURL.isNotEmpty()) {
-                activity.registerReceiver(
-                    attachmentDownloadCompleteReceive, IntentFilter(
+                activity.registerReceiver( //TODO 24
+                    attachmentDownloadCompleteReceive,
+                    IntentFilter(
                         DownloadManager.ACTION_DOWNLOAD_COMPLETE
-                    )
+                    ),
+                    ContextCompat.RECEIVER_EXPORTED
                 )
                 val request = DownloadManager.Request(Uri.parse(fileURL))
                 request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
