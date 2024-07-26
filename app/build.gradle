@@ -8,13 +8,13 @@ plugins {
 }
 
 android {
-    compileSdk 34
+    compileSdk 35
     defaultConfig {
         applicationId "com.falcon.usarcompanion"
         minSdk 21
-        targetSdk 34
-        versionCode 7
-        versionName "1.4"
+        targetSdk 35
+        versionCode 8
+        versionName "2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
