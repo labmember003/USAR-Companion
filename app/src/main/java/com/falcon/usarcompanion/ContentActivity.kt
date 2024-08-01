@@ -156,7 +156,7 @@ private lateinit var binding: ActivityContentBinding
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Storage Permission Granted", Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(this, "Storage Permission Denied", Toast.LENGTH_LONG).show()
+//                Toast.makeText(this, "Storage Permission Denied", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -179,7 +179,8 @@ private lateinit var binding: ActivityContentBinding
                 request.setMimeType(getMimeType(fileURL))
                 request.allowScanningByMediaScanner()
                 request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, titleAndFileName)
+//                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, titleAndFileName)
+                request.setDestinationInExternalFilesDir(this, Environment.DIRECTORY_DOWNLOADS, titleAndFileName)
                 Toast.makeText(
                     baseContext,
                     "Download has begun, See Notifications",

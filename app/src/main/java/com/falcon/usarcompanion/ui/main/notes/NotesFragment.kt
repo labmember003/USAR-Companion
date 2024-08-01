@@ -82,7 +82,8 @@ private var _binding: FragmentNotesBinding? = null
     }
  */
     private fun shareFile(fileName: String) {
-        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName)
+//        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName)  // This stores in phone's downloads folder, but the thing is we as an third party app don't have full access to it, So
+    val file = File(requireContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), fileName) // We Will store in our app's private folder where we have full access of the entire files
         if (file.exists()) {
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "*/*"
@@ -99,7 +100,8 @@ private var _binding: FragmentNotesBinding? = null
         }
     }
     private fun onContentClick(fileURL: String, titleAndFileName: String) {
-        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), titleAndFileName)
+//        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), titleAndFileName)
+        val file = File(requireContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), titleAndFileName)
         if (!file.exists()) {
             (activity as ContentActivity?)!!.startDownloading(fileURL, titleAndFileName)
             (activity as ContentActivity?)!!.openFile(file, fileURL)
