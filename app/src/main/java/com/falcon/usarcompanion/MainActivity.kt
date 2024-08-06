@@ -40,39 +40,51 @@ class MainActivity : AppCompatActivity()  {
         }
 
         binding.navView.setNavigationItemSelectedListener {
-             if (it.itemId == R.id.getDirections) {
-                 val intent = Intent(
-                     Intent.ACTION_VIEW,
-                     Uri.parse("http://maps.google.com/maps?34.34&daddr=28.66488568388205,77.30043327394083")
-                 )
-                 binding.drawerLayout.close()
-                 startActivity(intent)
-                 return@setNavigationItemSelectedListener true
-            }
-            else if (it.itemId == R.id.share) {
-                 val sendIntent: Intent = Intent().apply {
-                     action = Intent.ACTION_SEND
-                     putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}")
-                     type = "text/plain"
+             when (it.itemId) {
+                 R.id.getDirections -> {
+                     val intent = Intent(
+                         Intent.ACTION_VIEW,
+                         Uri.parse("http://maps.google.com/maps?34.34&daddr=28.66488568388205,77.30043327394083")
+                     )
+                     binding.drawerLayout.close()
+                     startActivity(intent)
+                     return@setNavigationItemSelectedListener true
                  }
-                 val shareIntent = Intent.createChooser(sendIntent, null)
-                 binding.drawerLayout.close()
-                 startActivity(shareIntent)
-                 return@setNavigationItemSelectedListener true
+                 R.id.notices -> {
+                     val url = "https://play.google.com/store/apps/details?id=com.falcon.ggsipunotices"
+                     val i = Intent(Intent.ACTION_VIEW)
+                     i.data = Uri.parse(url)
+                     binding.drawerLayout.close()
+                     startActivity(i)
+                     return@setNavigationItemSelectedListener true
+                 }
+                 R.id.share -> {
+                     val sendIntent: Intent = Intent().apply {
+                         action = Intent.ACTION_SEND
+                         putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}")
+                         type = "text/plain"
+                     }
+                     val shareIntent = Intent.createChooser(sendIntent, null)
+                     binding.drawerLayout.close()
+                     startActivity(shareIntent)
+                     return@setNavigationItemSelectedListener true
+                 }
+                 R.id.reviewAndEarn -> {
+                     val url = "https://tinyurl.com/shikshausar"
+                     val i = Intent(Intent.ACTION_VIEW)
+                     i.data = Uri.parse(url)
+                     binding.drawerLayout.close()
+                     startActivity(i)
+                     return@setNavigationItemSelectedListener true
+                 }
+                 else -> {
+                     val handled = NavigationUI.onNavDestinationSelected(it, navController)
+                     if (handled) {
+                         binding.drawerLayout.close()
+                     }
+                     handled
+                 }
              }
-            else if (it.itemId == R.id.reviewAndEarn) {
-                 val url = "https://tinyurl.com/shikshausar"
-                 val i = Intent(Intent.ACTION_VIEW)
-                 i.data = Uri.parse(url)
-                 binding.drawerLayout.close()
-                 startActivity(i)
-                 return@setNavigationItemSelectedListener true
-             }
-            val handled = NavigationUI.onNavDestinationSelected(it, navController)
-            if (handled) {
-                binding.drawerLayout.close()
-            }
-            handled
         }
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         var name = sharedPreferences.getString("name", "")

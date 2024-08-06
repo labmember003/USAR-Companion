@@ -26,6 +26,12 @@
             android:icon="@drawable/ic_baseline_result_right_alt_24"
             android:title="Result"
             />
+        <item
+            android:id="@+id/notices"
+            android:icon="@drawable/notes_grey"
+            android:iconTint="@color/black"
+            android:title="Notices"
+            />
         <!--
         <item
             android:id="@+id/SocietyFragment"
