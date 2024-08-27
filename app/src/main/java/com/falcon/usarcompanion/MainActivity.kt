@@ -34,11 +34,6 @@ class MainActivity : AppCompatActivity()  {
 
         MobileAds.initialize(this) {}
 
-        binding.fab.setOnClickListener { view ->
-            composeEmail("Regarding App " + getString(R.string.app_name))
-            //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAnchorView(R.id.fab).setAction("Action", null).show()
-        }
-
         binding.navView.setNavigationItemSelectedListener {
              when (it.itemId) {
                  R.id.getDirections -> {
