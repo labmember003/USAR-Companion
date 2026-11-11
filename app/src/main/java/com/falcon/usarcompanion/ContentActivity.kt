@@ -56,6 +56,8 @@ private lateinit var binding: ActivityContentBinding
         //
         binding = ActivityContentBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        // Keep the toolbar below the status bar; BottomNavigationView handles the navigation bar itself.
+        binding.root.padForSystemBars(top = true)
         setSupportActionBar(binding.toolbar)
         val navView: BottomNavigationView = binding.navView
         navView.itemIconTintList = null

@@ -8,13 +8,14 @@ plugins {
 }
 
 android {
-    compileSdk 34
+    namespace "com.falcon.usarcompanion"
+    compileSdk 36
     defaultConfig {
         applicationId "com.falcon.usarcompanion"
         minSdk 21
-        targetSdk 34
-        versionCode 9
-        versionName "2.1"
+        targetSdk 36
+        versionCode 10
+        versionName "2.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -25,8 +26,25 @@ android {
             // Add other dependencies that are causing conflicts
         }
     }
+    // Release signing reads the gitignored keystore.properties (storeFile, storePassword, keyAlias, keyPassword).
+    def keystorePropsFile = rootProject.file("keystore.properties")
+    if (keystorePropsFile.exists()) {
+        def keystoreProps = new Properties()
+        keystorePropsFile.withInputStream { keystoreProps.load(it) }
+        signingConfigs {
+            release {
+                storeFile file(keystoreProps['storeFile'])
+                storePassword keystoreProps['storePassword']
+                keyAlias keystoreProps['keyAlias']
+                keyPassword keystoreProps['keyPassword']
+            }
+        }
+    }
     buildTypes {
         release {
+            if (keystorePropsFile.exists()) {
+                signingConfig signingConfigs.release
+            }
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -46,8 +64,8 @@ android {
     buildFeatures {
         viewBinding true
         dataBinding true
+        buildConfig true
     }
-    buildToolsVersion '32.0.0'
     packagingOptions {
 //        exclude 'com/google/android/gms/internal/measurement/zzhx.class'
 //        exclude 'com/google/android/gms/internal/measurement/zzmz.class'
@@ -93,8 +111,8 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-scalars:2.9.0"
 
-    implementation "com.squareup.moshi:moshi-kotlin:1.14.0"
-    kapt "com.squareup.moshi:moshi-kotlin-codegen:1.14.0"
+    implementation "com.squareup.moshi:moshi-kotlin:1.15.2"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:1.15.2"
 
     implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
 
