@@ -1,30 +1,37 @@
 package com.falcon.usarcompanion
 
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-import android.app.DownloadManager
 import android.content.*
 import android.content.pm.PackageManager
-import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.falcon.usarcompanion.databinding.ActivityContentBinding
+import com.falcon.usarcompanion.network.Network
 import com.falcon.usarcompanion.network.Subject
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.progressindicator.LinearProgressIndicator
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
-import kotlin.math.absoluteValue
 
 
 class ContentActivity : AppCompatActivity() {
@@ -162,41 +169,63 @@ private lateinit var binding: ActivityContentBinding
             }
         }
     }
-    // Request code for selecting a PDF document.
+    private var downloadJob: Job? = null
+
+    /**
+     * Downloads a file inside the app and opens it when done. This replaces the system
+     * DownloadManager, which always used the carrier's DNS and so failed on mobile networks
+     * that block GitHub raw files; Network adds DNS-over-HTTPS and a jsDelivr fallback.
+     */
     fun startDownloading(fileURL: String, titleAndFileName: String) {
-        val activity = this
-        try {
-            if (fileURL.isNotEmpty()) {
-                activity.registerReceiver(
-                    attachmentDownloadCompleteReceive,
-                    IntentFilter(
-                        DownloadManager.ACTION_DOWNLOAD_COMPLETE
-                    ),
-                    ContextCompat.RECEIVER_EXPORTED
-                )
-                val request = DownloadManager.Request(Uri.parse(fileURL))
-                request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
-                request.setTitle(titleAndFileName)
-                request.setDescription("File is donwloading")
-                request.setMimeType(getMimeType(fileURL))
-                request.allowScanningByMediaScanner()
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-//                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, titleAndFileName)
-                request.setDestinationInExternalFilesDir(this, Environment.DIRECTORY_DOWNLOADS, titleAndFileName)
+        if (fileURL.isEmpty()) return
+        if (downloadJob?.isActive == true) {
+            Toast.makeText(this, "Please wait, a file is already downloading", Toast.LENGTH_SHORT).show()
+            return
+        }
+        val dir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) ?: filesDir
+        val target = File(dir, titleAndFileName)
+        target.parentFile?.mkdirs()
+
+        val progressBar = LinearProgressIndicator(this).apply {
+            isIndeterminate = true
+            max = 100
+        }
+        val padding = (24 * resources.displayMetrics.density).toInt()
+        val container = FrameLayout(this).apply {
+            setPadding(padding, padding / 2, padding, 0)
+            addView(progressBar)
+        }
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setTitle("Downloading")
+            .setMessage(titleAndFileName)
+            .setView(container)
+            .setCancelable(false)
+            .setNegativeButton("Cancel") { _, _ -> downloadJob?.cancel() }
+            .show()
+
+        downloadJob = lifecycleScope.launch {
+            val job = coroutineContext[Job]
+            try {
+                withContext(Dispatchers.IO) {
+                    Network.download(fileURL, target, isCancelled = { job?.isActive == false }) { percent ->
+                        if (percent >= 0) runOnUiThread {
+                            progressBar.isIndeterminate = false
+                            progressBar.setProgressCompat(percent, true)
+                        }
+                    }
+                }
+                dialog.dismiss()
+                openFile(target, fileURL)
+            } catch (e: Exception) {
+                dialog.dismiss()
+                if (e is CancellationException || job?.isActive == false) return@launch
+                Log.w("ContentActivity", "Download failed: $fileURL", e)
                 Toast.makeText(
-                    baseContext,
-                    "Download has begun, See Notifications",
+                    this@ContentActivity,
+                    "Download failed. Check your internet connection and try again.",
                     Toast.LENGTH_LONG
                 ).show()
-                val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-                manager.enqueue(request)
             }
-        } catch (e: IllegalStateException) {
-            Toast.makeText(
-                activity,
-                "Please insert an SD card to download file",
-                Toast.LENGTH_SHORT
-            ).show()
         }
     }
 
@@ -219,63 +248,4 @@ private lateinit var binding: ActivityContentBinding
             ).show()
         }
     }
-
-    private var attachmentDownloadCompleteReceive: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            val action = intent.action
-            if (DownloadManager.ACTION_DOWNLOAD_COMPLETE == action) {
-                val downloadId = intent.getLongExtra(
-                    DownloadManager.EXTRA_DOWNLOAD_ID, 0
-                )
-                openDownloadedAttachment(context, downloadId)
-            }
-        }
-    }
-    private fun openDownloadedAttachment(context: Context, downloadId: Long) {
-        val downloadManager = context.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
-        val query = DownloadManager.Query()
-        query.setFilterById(downloadId)
-        val cursor: Cursor = downloadManager.query(query)
-        if (cursor.moveToFirst()) {
-            val downloadStatus: Int =
-                cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS).absoluteValue)
-            val downloadLocalUri: String =
-                cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI).absoluteValue)
-            val downloadMimeType: String =
-                cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_MEDIA_TYPE).absoluteValue)
-            if (downloadStatus == DownloadManager.STATUS_SUCCESSFUL && downloadLocalUri != null) {
-                openDownloadedAttachment(context, Uri.parse(downloadLocalUri), downloadMimeType)
-            }
-        }
-        cursor.close()
-    }
-
-    private fun openDownloadedAttachment(
-        context: Context,
-        attachmentUri: Uri,
-        attachmentMimeType: String
-    ) {
-        var attachmentUri: Uri? = attachmentUri
-        if (attachmentUri != null) {
-            // Get Content Uri.
-            if (ContentResolver.SCHEME_FILE == attachmentUri.scheme) {
-                // FileUri - Convert it to contentUri.
-                val file = File(attachmentUri.path)
-                attachmentUri =
-                    FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID +".provider", file)
-            }
-            val openAttachmentIntent = Intent(Intent.ACTION_VIEW)
-            openAttachmentIntent.setDataAndType(attachmentUri, attachmentMimeType)
-            openAttachmentIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-            try {
-                context.startActivity(openAttachmentIntent)
-            } catch (e: ActivityNotFoundException) {
-
-            }
-        }
-    }
-
-
 }
-
-

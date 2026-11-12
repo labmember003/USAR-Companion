@@ -108,7 +108,6 @@ private var _binding: FragmentPapersBinding? = null
         val file = File(requireContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), titleAndFileName)
         if (!file.exists()) {
             (activity as ContentActivity?)!!.startDownloading(fileURL, titleAndFileName)
-            (activity as ContentActivity?)!!.openFile(file, fileURL)
         } else {
             (activity as ContentActivity?)!!.openFile(file, fileURL)
         }

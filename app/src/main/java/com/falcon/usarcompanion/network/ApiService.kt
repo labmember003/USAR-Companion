@@ -8,18 +8,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Url
-import java.util.concurrent.TimeUnit
 
 
 private const val BASE_URL = "https://github.com/labmember003/usar_data/raw/master/"
 
 private val moshi = Moshi.Builder().build()
 
-var okHttpClient = OkHttpClient().newBuilder()
-    .connectTimeout(60, TimeUnit.SECONDS)
-    .readTimeout(60, TimeUnit.SECONDS)
-    .writeTimeout(60, TimeUnit.SECONDS)
-    .build()
+// DNS-over-HTTPS + jsDelivr fallback, so content loads on mobile networks that block GitHub raw files.
+val okHttpClient: OkHttpClient get() = Network.client
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
