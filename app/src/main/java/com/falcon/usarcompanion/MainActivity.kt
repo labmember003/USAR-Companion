@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity()  {
 
 
     fun composeEmail(subject: String) {
-        val a = arrayOf("usarcompanion@gmail.com")
+        val a = arrayOf("falcontechlab@gmail.com")
         val intent = Intent(Intent.ACTION_SENDTO).apply {
             data = Uri.parse("mailto:") // only email apps should handle this
             putExtra(Intent.EXTRA_EMAIL, a)
