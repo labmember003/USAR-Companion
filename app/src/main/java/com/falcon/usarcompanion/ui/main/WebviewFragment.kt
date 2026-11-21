@@ -1,5 +1,7 @@
 package com.falcon.usarcompanion.ui.main
 
+import com.falcon.usarcompanion.Ads
+
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +13,6 @@ import android.webkit.WebViewClient
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.falcon.usarcompanion.databinding.FragmentWebviewBinding
-import com.google.android.gms.ads.AdRequest
 
 class WebviewFragment : Fragment() {
     private var _binding: FragmentWebviewBinding? = null
@@ -28,8 +29,7 @@ class WebviewFragment : Fragment() {
 //        binding.resultWebView.goBack()
 
         val mAdView = binding.adView
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+        Ads.load(mAdView)
         binding.resultWebView.webViewClient = object: WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)

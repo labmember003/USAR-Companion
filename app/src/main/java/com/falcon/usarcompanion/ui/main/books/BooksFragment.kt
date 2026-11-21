@@ -1,5 +1,7 @@
 package com.falcon.usarcompanion.ui.notifications
 
+import com.falcon.usarcompanion.Ads
+
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -17,7 +19,6 @@ import com.falcon.usarcompanion.ContentActivity
 import com.falcon.usarcompanion.databinding.FragmentBooksBinding
 import com.falcon.usarcompanion.network.Section
 import com.falcon.usarcompanion.ui.main.RcvContentAdapter
-import com.google.android.gms.ads.AdRequest
 import java.io.File
 
 class BooksFragment : Fragment() {
@@ -78,8 +79,7 @@ private var _binding: FragmentBooksBinding? = null
         //
 
         val mAdView = binding.adView
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+        Ads.load(mAdView)
 
     }
     override fun onDestroyView() {

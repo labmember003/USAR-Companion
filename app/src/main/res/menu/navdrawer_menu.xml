@@ -66,6 +66,12 @@
             android:id="@+id/reviewAndEarn"
             android:icon="@drawable/ic_baseline_attach_money_24"
             android:title="Review College And  Earn" />
+        <item
+            android:id="@+id/adPrivacyChoices"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:title="Ad privacy choices"
+            android:checkable="false"
+            android:visible="false" />
 
     </group>
 </menu>

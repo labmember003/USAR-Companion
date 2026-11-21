@@ -11,10 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import com.falcon.usarcompanion.databinding.FragmentFirstBinding
 import com.falcon.usarcompanion.databinding.FragmentResourcesBinding
-import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
 import kotlinx.coroutines.NonDisposableHandle.parent
 
 class Resources : Fragment() {
@@ -54,8 +52,7 @@ class Resources : Fragment() {
         //getActionBar()!!.setTitle("USAR Companion")
 
         val mAdView = binding.adView
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+        Ads.load(mAdView)
         /*
         // making resource fragment as start destination
         1. NavGraph mei start destination ko first fragment se resource fragment kr diya

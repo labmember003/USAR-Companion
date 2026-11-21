@@ -1,5 +1,7 @@
 package com.falcon.usarcompanion.ui.main.papers
 
+import com.falcon.usarcompanion.Ads
+
 import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
@@ -17,7 +19,6 @@ import com.falcon.usarcompanion.databinding.FragmentPapersBinding
 import com.falcon.usarcompanion.network.Section
 import com.falcon.usarcompanion.ui.dashboard.PapersViewModel
 import com.falcon.usarcompanion.ui.main.RcvContentAdapter
-import com.google.android.gms.ads.AdRequest
 import java.io.File
 
 class PapersFragment : Fragment() {
@@ -77,8 +78,7 @@ private var _binding: FragmentPapersBinding? = null
         binding.rvContentsPapers.layoutManager = LinearLayoutManager(requireContext())
 
         val mAdView = binding.adView
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+        Ads.load(mAdView)
     }
 
     override fun onDestroyView() {

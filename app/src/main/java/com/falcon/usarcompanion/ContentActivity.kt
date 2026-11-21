@@ -21,8 +21,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.falcon.usarcompanion.databinding.ActivityContentBinding
 import com.falcon.usarcompanion.network.Network
 import com.falcon.usarcompanion.network.Subject
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.progressindicator.LinearProgressIndicator
@@ -43,7 +41,6 @@ private lateinit var binding: ActivityContentBinding
         //
         //ActivityCompat.requestPermissions(this,,1)
         // Function to check and request permission.
-        MobileAds.initialize(this) {}
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED) {
             //Toast.makeText(this, "bro Permission tho de", Toast.LENGTH_SHORT).show()

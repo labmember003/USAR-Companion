@@ -16,6 +16,9 @@ android {
         targetSdk 36
         versionCode 12
         versionName "2.4.0"
+        // AdMob (account pub-7683902216769416, moved from the old pub-4084185609621967). Debug builds use Google's test banner.
+        manifestPlaceholders = [admobAppId: "ca-app-pub-7683902216769416~6757130286"]
+        resValue "string", "admob_banner_id", "ca-app-pub-7683902216769416/8693240515"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -52,6 +55,7 @@ android {
         debug {
             minifyEnabled false
             shrinkResources false
+            resValue "string", "admob_banner_id", "ca-app-pub-3940256099942544/6300978111"
         }
     }
     testOptions {
@@ -145,10 +149,9 @@ dependencies {
 //        exclude module: 'play-services-measurement-base'
 //        exclude module: 'play-services-measurement-impl'
 //    }
-    implementation ('com.google.android.gms:play-services-ads:23.2.0') {
-//        exclude group: 'com.google.android.gms', module: 'play-services-measurement-base'
-//        exclude group: 'com.google.android.gms', module: 'play-services-measurement-impl'
-    }
+    // 23.6.0 is the newest Ads SDK that still supports minSdk 21; UMP 3.2.0 shows the GDPR consent form (EEA/UK only)
+    implementation 'com.google.android.gms:play-services-ads:23.6.0'
+    implementation 'com.google.android.ump:user-messaging-platform:3.2.0'
 //    implementation platform('com.google.android.gms:play-services-bom:17.6.0')
 
 }

@@ -1,5 +1,7 @@
 package com.falcon.usarcompanion.ui.main.syllabus
 
+import com.falcon.usarcompanion.Ads
+
 import android.content.Intent
 import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
@@ -17,7 +19,6 @@ import com.falcon.usarcompanion.ContentActivity
 import com.falcon.usarcompanion.databinding.FragmentSyllabusBinding
 import com.falcon.usarcompanion.network.Section
 import com.falcon.usarcompanion.ui.main.RcvContentAdapter
-import com.google.android.gms.ads.AdRequest
 import java.io.File
 
 class SyllabusFragment : Fragment() {
@@ -68,8 +69,7 @@ class SyllabusFragment : Fragment() {
         binding.rvContents.layoutManager = LinearLayoutManager(requireContext())
         //
         val mAdView = binding.adView
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+        Ads.load(mAdView)
     }
     override fun onDestroyView() {
         super.onDestroyView()

@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.falcon.usarcompanion.databinding.FragmentBranchesTabbedBinding
 import com.falcon.usarcompanion.ui.main.SectionsPagerAdapter
 import com.falcon.usarcompanion.ui.main.TAB_TITLES
-import com.google.android.gms.ads.AdRequest
 import com.google.android.material.tabs.TabLayoutMediator
 
 class BranchesTabbedFragment : Fragment() {
@@ -41,8 +40,7 @@ class BranchesTabbedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val mAdView = binding.adView
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+        Ads.load(mAdView)
     }
 
     private fun getActionBar(): androidx.appcompat.app.ActionBar? {

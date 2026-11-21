@@ -24,7 +24,7 @@
         android:enableOnBackInvokedCallback="false">
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-4084185609621967~7480292046"/>
+            android:value="${admobAppId}"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

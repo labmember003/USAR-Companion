@@ -1,5 +1,7 @@
 package com.falcon.usarcompanion.ui.main.playlists
 
+import com.falcon.usarcompanion.Ads
+
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
@@ -18,7 +20,6 @@ import com.falcon.usarcompanion.BuildConfig
 import com.falcon.usarcompanion.databinding.FragmentPlaylistsBinding
 import com.falcon.usarcompanion.network.Section
 import com.falcon.usarcompanion.ui.main.RcvContentAdapter
-import com.google.android.gms.ads.AdRequest
 import java.io.File
 
 
@@ -63,8 +64,7 @@ class PlaylistsFragment : Fragment() {
         binding.rvContents.layoutManager = LinearLayoutManager(requireContext())
         //
         val mAdView = binding.adView
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+        Ads.load(mAdView)
     }
     override fun onDestroyView() {
         super.onDestroyView()

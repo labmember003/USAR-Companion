@@ -14,7 +14,6 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
 import androidx.preference.PreferenceManager
 import com.falcon.usarcompanion.databinding.ActivityMainBinding
-import com.google.android.gms.ads.MobileAds
 
 
 class MainActivity : AppCompatActivity()  {
@@ -22,7 +21,6 @@ class MainActivity : AppCompatActivity()  {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-        MobileAds.initialize(this) {}
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -35,7 +33,10 @@ class MainActivity : AppCompatActivity()  {
         NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout)
         NavigationUI.setupWithNavController(binding.navView, navController)
 
-        MobileAds.initialize(this) {}
+        // Ads wait for consent (the form only appears where the law needs it, e.g. EEA/UK)
+        val adPrivacyItem = binding.navView.menu.findItem(R.id.adPrivacyChoices)
+        Ads.onPrivacyOptionsChanged = { required -> runOnUiThread { adPrivacyItem.isVisible = required } }
+        Ads.gatherConsent(this)
 
         binding.navView.setNavigationItemSelectedListener {
              when (it.itemId) {
@@ -65,6 +66,11 @@ class MainActivity : AppCompatActivity()  {
                      val shareIntent = Intent.createChooser(sendIntent, null)
                      binding.drawerLayout.close()
                      startActivity(shareIntent)
+                     return@setNavigationItemSelectedListener true
+                 }
+                 R.id.adPrivacyChoices -> {
+                     binding.drawerLayout.close()
+                     Ads.showPrivacyOptions(this)
                      return@setNavigationItemSelectedListener true
                  }
                  R.id.reviewAndEarn -> {
