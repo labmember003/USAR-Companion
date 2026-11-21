@@ -97,7 +97,7 @@
             app:iconSpaceReserved="false">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://sites.google.com/view/usarcompanion/home"
+                android:data="https://falcontechlab.vercel.app/usar-companion/privacy/"
             />
         </Preference>
 
