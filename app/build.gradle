@@ -14,8 +14,8 @@ android {
         applicationId "com.falcon.usarcompanion"
         minSdk 21
         targetSdk 36
-        versionCode 12
-        versionName "2.4.0"
+        versionCode 13
+        versionName "2.4.1"
         // AdMob (account pub-7683902216769416, moved from the old pub-4084185609621967). Debug builds use Google's test banner.
         manifestPlaceholders = [admobAppId: "ca-app-pub-7683902216769416~6757130286"]
         resValue "string", "admob_banner_id", "ca-app-pub-7683902216769416/8693240515"
